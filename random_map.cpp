@@ -1,0 +1,118 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+//每一个点的信息包含坐标
+struct cell{
+    int x,y;
+    bool visited, top_w, left_w, right_w, down_w;
+};
+
+void init(cell* now,int initX, int initY);
+void printMaze(cell** &maze, int width, int height);
+void generateMaze(cell** &maze, int width,int height,int start_x,int start_y);
+
+int main(){
+    int width;
+    int height;
+    int start_x,start_y;
+    cout<<"Width: ";
+    cin>>width;
+    cout<<"Height: ";
+    cin>>height;
+    cout<<"start_x: ";
+    cin>>start_x;
+    cout<<"start_y: ";
+    cin>>start_y;
+    cell** maze = new cell*[width]; //使用动态数组创建maze
+    for (int i = 0; i < width; ++i) {
+        maze[i] = new cell [height];
+    }
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            init(&maze[i][j],i,j);
+        }
+    }
+    generateMaze(maze, width,height,start_x,start_y);
+}
+
+void init(cell *now,int initX, int initY) {
+    now->x = initX;
+    now->y = initY;
+    now->visited = false;
+    now->top_w = true;
+    now->left_w = true;
+    now->right_w = true;
+    now->down_w = true;
+}
+
+void generateMaze(cell** &maze, int width,int height,int start_x,int start_y){
+    srand(time(nullptr));
+    stack <cell*> cellstack;
+    int totalcells=width*height;
+    int visitedcells=1;
+    cell *current=&maze[start_x][start_y]; // 起始点
+    current->visited=true;
+    //一直运行知道所有点都走过
+    while (visitedcells<totalcells){
+        vector <cell*> neighbour; //记录周围的点
+        //left
+        if (current->x > 0 && maze[current->x - 1][current->y].visited==false){
+            neighbour.push_back(&maze[current->x - 1][current->y]);
+        }
+        //right
+        if (current->x < width-1 && maze[current->x + 1][current->y].visited==false){
+            neighbour.push_back(&maze[current->x + 1][current->y]);
+        }
+        //up
+        if (current->y > 0 && maze[current->x ][current->y-1].visited==false){
+            neighbour.push_back(&maze[current->x][current->y-1]);
+        }
+        //down
+        if (current->y < height-1 && maze[current->x][current->y+1].visited==false){
+            neighbour.push_back(&maze[current->x][current->y+1]);
+        }
+        
+        if (!neighbour.empty()) {
+            cell* next = neighbour[rand() % neighbour.size()]; //随机从neighbour vector中选一个方向
+            //移除他们之间的墙壁
+            if (next->y == current->y){
+                //往右走
+                if (next->x-current->x==1){
+                    //移除current右边和next左边的墙
+                    current->right_w=next->left_w=false;
+                }
+                //往左走
+                else{
+                    //移除current左边和next右边的墙
+                    current->left_w=next->right_w=false;
+                }
+            }
+            else{
+                //往下走
+                if (next->y - current->y == 1){
+                    //移除current下边和next上边的墙
+                    current->down_w=next->top_w=false;
+                }
+                //往上走
+                else{
+                    //移除current上边和next下边的墙
+                    current->top_w=next->down_w=false;
+                }
+            }
+            cellstack.push(current);//在栈的最后插入当前点
+            current=next;
+            current->visited=true;
+            visitedcells++;
+        }else{//如果没有相邻的点能去
+            if (!cellstack.empty()){//并且栈里有东西
+                current=cellstack.top();//返回到上一次的cell
+                cellstack.pop();//将最后的cell弹出
+            }
+        }
+    }
+    
+}
