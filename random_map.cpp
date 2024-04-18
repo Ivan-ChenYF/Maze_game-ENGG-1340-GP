@@ -6,7 +6,7 @@
 #include <ncurses.h>
 using namespace std;
 
-//每一个点的信息包含坐标
+//每一个点的信息
 struct cell{
     int x,y;
     bool visited, top_w, left_w, right_w, down_w;
@@ -34,6 +34,7 @@ int main(){
 }
 
 void init(cell *now,int initX, int initY) {
+    //初始化点的所有信息
     now->x = initX;
     now->y = initY;
     now->visited = false;
@@ -42,15 +43,16 @@ void init(cell *now,int initX, int initY) {
     now->right_w = true;
     now->down_w = true;
 }
-
+//使用了DFS算法实现的maze地图随机生成
 void generateMaze(cell** &maze, int width,int height,int start_x,int start_y){
     srand(time(nullptr));
-    stack <cell*> cellstack;
+    stack <cell*> cellstack; //创建栈记录走过的点以便直接从堆顶读取并弹出数据
     int totalcells=width*height;
     int visitedcells=1;
     cell *current=&maze[start_x][start_y]; // 起始点
-    current->visited=true;
-    //一直运行知道所有点都走过
+    current->visited=true;//走过的点更新状态
+    //一直运行直到所有点都走过
+    
     while (visitedcells<totalcells){
         vector <cell*> neighbour; //记录周围的点
         //left
@@ -98,8 +100,8 @@ void generateMaze(cell** &maze, int width,int height,int start_x,int start_y){
                 }
             }
             cellstack.push(current);//在栈的最后插入当前点
-            current=next;
-            current->visited=true;
+            current=next; //pointer移动到下一个位置
+            current->visited=true; 
             visitedcells++;
         }else{//如果没有相邻的点能去
             if (!cellstack.empty()){//并且栈里有东西
@@ -111,7 +113,8 @@ void generateMaze(cell** &maze, int width,int height,int start_x,int start_y){
     
 }
 
-
+//这段来自ChatGPT需要Elaine修改
+//ONLY FOR TEST FOR CODING
 void printMaze(cell** maze, int width, int height, int player_x,int player_y) {
     initscr();          // Start ncurses mode
     cbreak();           // Disable line buffering
