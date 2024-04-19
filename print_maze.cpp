@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <ncurses.h>
-#include "printMaze.h"
+#include "random_maze.h"
 using namespace std;
 
 
