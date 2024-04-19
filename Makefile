@@ -1,18 +1,18 @@
 FLAGS = -pedantic-errors -std=c++11
 
-maze: main.o maze.o
-    g++ $(FLAGS) -o maze main.o maze.o 
+maze: main.o random_maze.o
+	g++  $(FLAGS) -o maze main.o random_maze.o  -lncurses
 
 main.o: main.cpp random_maze.h
-    g++ $(FLAGS) -c main.cpp 
+	g++ $(FLAGS) -c main.cpp
 
-maze.o: random_maze.cpp random_maze.h
-    g++ $(FLAGS) -c maze.cpp 
+random_maze.o: random_maze.cpp random_maze.h
+	g++ $(FLAGS) -c random_maze.cpp
 
 compile:
-    maze
+	make maze
 clean:
-    rm -f *.o maze
+	rm -f *.o maze
 run:
-    ./maze
-.PHONY: clean run
+	./maze
+.PHONY: clean run compile
