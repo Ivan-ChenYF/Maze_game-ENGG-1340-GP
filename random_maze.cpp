@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <ncurses.h>
-#include <maze.h>
+#include "random_maze.h"
 using namespace std;
 
 void init(cell *now,int initX, int initY) {
