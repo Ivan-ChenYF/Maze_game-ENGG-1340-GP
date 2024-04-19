@@ -1,4 +1,4 @@
-#include "maze.h"
+#include "random_maze.h"
 #include <iostream>
 
 int main(){
