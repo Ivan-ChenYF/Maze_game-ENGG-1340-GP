@@ -4,34 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <ncurses.h>
+#include <maze.h>
 using namespace std;
-
-//每一个点的信息
-struct cell{
-    int x,y;
-    bool visited, top_w, left_w, right_w, down_w;
-};
-
-void init(cell* now,int initX, int initY);
-void generateMaze(cell** &maze, int width,int height,int start_x,int start_y);
-void printMaze(cell** maze, int width, int height, int play_posit_x,int play_posit_y);
-int main(){
-    int width;
-    int height;
-    int start_x,start_y;
-    cin>>width>>height>>start_x>>start_y;
-    cell** maze = new cell*[width]; //使用动态数组创建maze
-    for (int i = 0; i < width; ++i) {
-        maze[i] = new cell [height];
-    }
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            init(&maze[i][j],i,j);
-        }
-    }
-    generateMaze(maze, width,height,start_x,start_y);
-    printMaze(maze, width,height,start_x,start_y);
-}
 
 void init(cell *now,int initX, int initY) {
     //初始化点的所有信息
