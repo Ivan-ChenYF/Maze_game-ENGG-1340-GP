@@ -9,6 +9,7 @@ int main(){
     initscr();
     PrintFromFile("ASCII - Enigma_Maze.txt");
     getch();
+    clear();
     endwin();
 
     int width;
