@@ -1,7 +1,16 @@
 #include "random_maze.h"
 #include <iostream>
+#include <ncurses.h>
+#include <string>
 using namespace std;
+
 int main(){
+    setlocale(LC_ALL, "");
+    initscr();
+    PrintFromFile("ASCII - Enigma_Maze.txt");
+    getch();
+    endwin();
+
     int width;
     int height;
     int start_x,start_y;
@@ -31,4 +40,5 @@ int main(){
     delete[] maze;
     return 0;
 }
+
 
