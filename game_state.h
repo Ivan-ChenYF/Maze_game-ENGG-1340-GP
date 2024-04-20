@@ -8,6 +8,7 @@ using namespace std;
 
 struct gameState {
     cell** maze;
+    string player_name;
     int width, height;
     int player_x, player_y;
 };
