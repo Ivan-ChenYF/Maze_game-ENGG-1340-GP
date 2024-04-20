@@ -1,4 +1,5 @@
 #include "random_maze.h"
+#include "game_state.h"
 #include <iostream>
 #include <ncurses.h>
 #include <string>
