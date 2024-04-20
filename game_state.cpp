@@ -4,6 +4,9 @@ using namespace std;
 void saveGame(const gameState& gameState, const string& filename) {
     ofstream fout(filename);
 
+    // Write player name
+    fout << gameState.player_name << endl;
+    
     // Write player position
     fout << gameState.player_x << " " << gameState.player_y << endl;
 
@@ -25,6 +28,9 @@ void saveGame(const gameState& gameState, const string& filename) {
 
 void loadGame(gameState& gameState, const string& filename) {
     ifstream fin(filename);
+
+    // Read player name
+    fin >> gameState.player_name;
 
     // Read player position
     fin >> gameState.player_x >> gameState.player_y;
