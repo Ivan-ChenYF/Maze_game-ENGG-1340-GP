@@ -16,13 +16,16 @@ void init(cell *now,int initX, int initY) {
     now->left_w = true;
     now->right_w = true;
     now->down_w = true;
+    now->revealed=false;
 }
 //使用了DFS算法实现的maze地图随机生成
-void generateMaze(cell** &maze, int width,int height,int start_x,int start_y){
+void generateMaze(cell** &maze, int width,int height,int start_x,int start_y,int &end_x,int &end_y){
     srand(time(nullptr));
     stack <cell*> cellstack; //创建栈记录走过的点以便直接从堆顶读取并弹出数据
     int totalcells=width*height;
     int visitedcells=1;
+    int maxDistance=0;
+    int currentDistance;
     cell *current=&maze[start_x][start_y]; // 起始点
     current->visited=true;//走过的点更新状态
     //一直运行直到所有点都走过
@@ -75,8 +78,16 @@ void generateMaze(cell** &maze, int width,int height,int start_x,int start_y){
             }
             cellstack.push(current);//在栈的最后插入当前点
             current=next; //pointer移动到下一个位置
-            current->visited=true; 
+            current->visited=true;
             visitedcells++;
+            currentDistance = cellstack.size(); // Distance is the stack size
+            if (currentDistance > maxDistance) {
+                maxDistance = currentDistance;
+                end_x = current->x;
+                end_y = current->y;
+            }
+            
+            
         }else{//如果没有相邻的点能去
             if (!cellstack.empty()){//并且栈里有东西
                 current=cellstack.top();//返回到上一次的cell
