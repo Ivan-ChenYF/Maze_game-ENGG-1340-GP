@@ -1,5 +1,6 @@
 #include "random_maze.h"
 #include "game_state.h"
+#include "player_control.h"
 #include <iostream>
 #include <ncurses.h>
 #include <string>
@@ -73,6 +74,7 @@ int main(){
     
     generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
     printMaze(maze, width,height,start_x,start_y,end_x,end_y);
+    player_movement(maze, width, height, start_x, start_y);
     
 
 
