@@ -23,43 +23,6 @@ char getSingleKeyPress()
     return key;
 }
 
-bool isValidMove(cell **maze, int newY, int newX, int height, int width, char direction)
-{
-    if (newY > 0 && newY < height && newX > 0 && newX < width)
-    {
-        switch (direction)
-        {
-        case 'w': // moving up
-            if (!maze[newY][newX].down_w)
-            {
-                return true;
-            }
-            break;
-        case 'a': // moving left
-            if (!maze[newY][newX].right_w)
-            {
-                return true;
-            }
-            break;
-        case 's': // moving down
-            if (!maze[newY][newX].top_w)
-            {
-                return true;
-            }
-            break;
-        case 'd': // moving right
-            if (!maze[newY][newX].left_w)
-            {
-                return true;
-            }
-            break;
-        default:
-            return true; // smvprintw(0, 0, "Invalid input. Please enter w, a, s, or d.");
-            break;
-        }
-    }
-    return false;
-}
 
 void player_movement(cell **maze, int width, int height, int start_x, int start_y)
 {
@@ -82,7 +45,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             else
             {
-                cout << "cant move" << endl;
+                mvprintw(0, height + 2, "cant move");
                 printMaze(maze, width, height, start_x, start_y);
                 break;
             }
@@ -97,7 +60,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             else
             {
-                cout << "cant move" << endl;
+                mvprintw(0, height + 2, "cant move");
                 printMaze(maze, width, height, start_x, start_y);
                 break;
             }
@@ -112,7 +75,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             else
             {
-                cout << "cant move" << endl;
+                mvprintw(0, height + 2, "cant move");
                 printMaze(maze, width, height, start_x, start_y);
                 break;
             }
@@ -127,13 +90,13 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             else
             {
-                cout << "cant move" << endl;
+                mvprintw(0, height + 2, "cant move");
                 printMaze(maze, width, height, start_x, start_y);
                 // refresh();
             }
             break;
         case 'q':
-            cout << "Quitting the game." << endl;
+            // mvprintw( height +2, 0,  "Quitting th)" << endl;
             return; // Exit the function and stop the game
         default:
             // smvprintw(0, 0, "Invalid input. Please enter w, a, s, or d.");
