@@ -36,7 +36,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
         switch (input)
         {
         case 'w':
-            if (playerY > 0)
+            if (playerY > 0 && !maze[newY-1][newX].down_w)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerY--;
@@ -51,7 +51,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             break;
         case 'a':
-            if (playerX > 0)
+            if (playerX > 0 && !maze[newY][newX-1].right_w)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerX--;
@@ -66,7 +66,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             break;
         case 's':
-            if (playerY < height - 1)
+            if (playerY < height - 1 !!maze[newY+1][newX].down_w)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerY++;
@@ -81,7 +81,7 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
             }
             break;
         case 'd':
-            if (playerX < width - 1)
+            if (playerX < width - 1 && !maze[newY][newX+1].right_w)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerX++;
