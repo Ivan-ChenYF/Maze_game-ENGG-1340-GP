@@ -30,25 +30,25 @@ bool isValidMove(cell **maze, int newY, int newX, int height, int width, char di
         switch (direction)
         {
         case 'w': // moving up
-            if (!maze[newY][newX].top_w)
-            {
-                return true;
-            }
-            break;
-        case 'a': // moving left
-            if (!maze[newY][newX].left_w)
-            {
-                return true;
-            }
-            break;
-        case 's': // moving down
             if (!maze[newY][newX].down_w)
             {
                 return true;
             }
             break;
-        case 'd': // moving right
+        case 'a': // moving left
             if (!maze[newY][newX].right_w)
+            {
+                return true;
+            }
+            break;
+        case 's': // moving down
+            if (!maze[newY][newX].top_w)
+            {
+                return true;
+            }
+            break;
+        case 'd': // moving right
+            if (!maze[newY][newX].left_w)
             {
                 return true;
             }
@@ -63,61 +63,73 @@ bool isValidMove(cell **maze, int newY, int newX, int height, int width, char di
 
 void player_movement(cell **maze, int width, int height, int start_x, int start_y)
 {
-    int playerY = start_y, playerX = start_x; // Initial player position
-    // mvaddch(2 * playerY + 1, 3 * playerX + 1, '@'); // Draw player at initial position
+    int playerY = start_y, playerX = start_x;       // Initial player position
+    mvaddch(2 * playerY + 1, 3 * playerX + 1, '@'); // Draw player at initial position
 
     while (true)
     {
         char input = getSingleKeyPress();
-
+        // int playerY = start_y, playerX = start_x;
         switch (input)
         {
         case 'w':
-            if (isValidMove(maze, playerY - 1, playerX, height, width, input))
+            if (playerY > 0)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerY--;
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, '@'); // Draw player at new position
+                start_y = playerY;
             }
             else
             {
                 cout << "cant move" << endl;
+                printMaze(maze, width, height, start_x, start_y);
+                break;
             }
             break;
         case 'a':
-            if (isValidMove(maze, playerY, playerX - 1, height, width, input))
+            if (playerX > 0)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerX--;
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, '@'); // Draw player at new position
+                start_x = playerX;
             }
             else
             {
                 cout << "cant move" << endl;
+                printMaze(maze, width, height, start_x, start_y);
+                break;
             }
             break;
         case 's':
-            if (isValidMove(maze, playerY + 1, playerX, height, width, input))
+            if (playerY < height - 1)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerY++;
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, '@'); // Draw player at new position
+                start_y = playerY;
             }
             else
             {
                 cout << "cant move" << endl;
+                printMaze(maze, width, height, start_x, start_y);
+                break;
             }
             break;
         case 'd':
-            if (isValidMove(maze, playerY, playerX + 1, height, width, input))
+            if (playerX < width - 1)
             {
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, ' '); // Clear current position
                 playerX++;
                 mvaddch(2 * playerY + 1, 3 * playerX + 1, '@'); // Draw player at new position
+                start_x = playerX;
             }
             else
             {
                 cout << "cant move" << endl;
+                printMaze(maze, width, height, start_x, start_y);
+                // refresh();
             }
             break;
         case 'q':
@@ -129,5 +141,6 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
         }
 
         refresh(); // Refresh the screen to show the changes
+        // printMaze(maze, width, height, start_x, start_y);
     }
 }
