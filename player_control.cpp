@@ -30,25 +30,25 @@ bool isValidMove(cell **maze, int newY, int newX, int height, int width, char di
         switch (direction)
         {
         case 'w': // moving up
-            if (!maze[newY][newX].down_w)
-            {
-                return true;
-            }
-            break;
-        case 'a': // moving left
-            if (!maze[newY][newX].right_w)
-            {
-                return true;
-            }
-            break;
-        case 's': // moving down
             if (!maze[newY][newX].top_w)
             {
                 return true;
             }
             break;
-        case 'd': // moving right
+        case 'a': // moving left
             if (!maze[newY][newX].left_w)
+            {
+                return true;
+            }
+            break;
+        case 's': // moving down
+            if (!maze[newY][newX].down_w)
+            {
+                return true;
+            }
+            break;
+        case 'd': // moving right
+            if (!maze[newY][newX].right_w)
             {
                 return true;
             }
@@ -131,4 +131,3 @@ void player_movement(cell **maze, int width, int height, int start_x, int start_
         refresh(); // Refresh the screen to show the changes
     }
 }
-
