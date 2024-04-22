@@ -1,7 +1,16 @@
 #include "game_state.h"
 using namespace std;
 
-void saveGame(const gameState& gameState, const string& filename) {
+void initializeNewGame(GameState& gameState) {
+    // Set player's initial position
+    gameState.player_x = 0;
+    gameState.player_y = 0;
+
+    // Initialize inventory
+    gameState.inventory.clear();
+}
+
+void saveGame(const GameState& gameState, const string& filename) {
     ofstream fout(filename);
 
     // Write player name
@@ -23,10 +32,19 @@ void saveGame(const gameState& gameState, const string& filename) {
         }
     }
 
+    // Write inventory
+    int inventory_size = gameState.inventory.size();
+    fout << inventory_size << endl;
+    
+    for (int i = 0; i < inventory_size; i++) {
+        fout << gameState.inventory[i].name << " "
+             << gameState.inventory[i].quantity << endl;
+    }
+    
     fout.close();
 }
 
-void loadGame(gameState& gameState, const string& filename) {
+void loadGame(GameState& gameState, const string& filename) {
     ifstream fin(filename);
 
     // Read player name
@@ -54,5 +72,14 @@ void loadGame(gameState& gameState, const string& filename) {
         }
     }
 
+    // Read inventory
+    int inventory_size;
+    fin >> inventory_size;
+    
+    for (int i = 0; i < inventory_size; i++) {
+        fin >> gameState.inventory[i].name
+            >> gameState.inventory[i].quantity
+    }
+    
     fin.close();
 }
