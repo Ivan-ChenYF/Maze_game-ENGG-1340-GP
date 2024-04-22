@@ -53,7 +53,7 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
     }
 }
 
-void classic(int &width,int &height,int &start_x, int &start_y){
+void difficult_level(int &width,int &height,int &start_x, int &start_y){
     if (mode=="easy"){
         width=height=10;
     }
@@ -122,8 +122,8 @@ int main(){
     int start_x,start_y;
     int end_x,end_y;
 
-    classic(width,height,start_x,start_y);
-    
+    else{
+        fog
     time_t start_time = time(nullptr);
     time_t current_time;
     cell** maze = new cell*[width]; //使用动态数组创建maze
@@ -162,8 +162,12 @@ int main(){
         if (elapsed>50||(player_x==end_x&&player_y==end_y)){
             break;
         }
-        classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y);
-        
+        if (mode==0){
+            classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y);
+        }
+        else{
+            fog_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y);
+        }
         if (ch == ERR) continue;
         
         player_movement(maze,width,height,player_x,player_y,ch);
