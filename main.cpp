@@ -79,6 +79,7 @@ void classic(int &width,int &height,int &start_x, int &start_y){
 }
 int main(){
     GameState game; // Initialize gameState
+    vector<int> time_rank; // Initialize ranking
     
     setlocale(LC_ALL, "");
     
