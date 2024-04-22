@@ -15,6 +15,9 @@ print_maze.o: print_maze.cpp random_maze.h
 print_file.o: print_file.cpp random_maze.h
 	g++ $(FLAGS) -c print_file.cpp
 
+game_state.o: game_state.cpp game_state.h
+	g++ $(FLAGS) -c game_state.cpp
+
 compile:
 	make maze
 clean:
