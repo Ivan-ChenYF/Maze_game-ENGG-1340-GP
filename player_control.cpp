@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include "player_control.h"
 #include "random_maze.h"
-#include "game_state.h"
 #include <ncurses.h>
 
 using namespace std;
@@ -14,103 +13,129 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
 {
     // Draw player at initial position
 
-    while (true)
+    // char input = getSingleKeyPress();
+    //  int playerY = start_y, playerX = start_x;
+    switch (input)
     {
-        // char input = getSingleKeyPress();
-        //  int playerY = start_y, playerX = start_x;
-        switch (input)
+    case 119:
+        if (playerY > 0 && !maze[playerX][playerY].top_w)
         {
-        case 119: //moving up
-            if (playerY > 0 && !maze[playerY - 1][playerX].down_w)
-            {
-                playerY--;
-            }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                break;
-            }
+            playerY--;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
             break;
-        case 97: //moving left
-            if (playerX > 0 && !maze[playerY][playerX - 1].right_w)
-            {
-                playerX--;
-            }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                break;
-            }
+        }
+        break;
+    case 97:
+        if (playerX > 0 && !maze[playerX][playerY].right_w)
+        {
+            playerX--;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
             break;
-        case 115: //down
-            if (playerY < height - 1 && !maze[playerY + 1][playerX].down_w)
-            {
-                playerY++;
-            }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                break;
-            }
+        }
+        break;
+    case 115:
+        if (playerY < height - 1 && !maze[playerX][playerY].down_w)
+        {
+            playerY++;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
             break;
-        case 100: //right
-            if (playerX < width - 1 && !maze[playerY][playerX + 1].right_w)
-            {
-                playerX++;
-            }
-            
-        case 104:
-            saveGame(game);
-            
+        }
+        break;
+    case 100:
+        if (playerX < width - 1 && !maze[playerX][playerY].right_w)
+        {
+            playerX++;
+        }
+
+    case KEY_UP:
+        if (playerY > 0 && !maze[playerX][playerY].top_w)
+        {
+            playerY--;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
+            break;
+        }
+        break;
+    case KEY_LEFT:
+        if (playerX > 0 && !maze[playerX][playerY].left_w)
+        {
+            playerX--;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
+            break;
+        }
+        break;
+    case KEY_DOWN:
+        if (playerY < height - 1 && !maze[playerX][playerY].down_w)
+        {
+            playerY++;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
+            break;
+        }
+        break;
+    case KEY_RIGHT:
+        if (playerX < width - 1 && !maze[playerX][playerY].right_w)
+        {
+            playerX++;
+        }
+        else
+        {
+            mvprintw(0, height + 2, "cant move");
+            // refresh();
+        }
+    case 'b': // 'b' for bomb
+        mvprintw(0, 2 * height + 1, "You got a bomb, press arrow key to choose wall to destroy");
+        refresh();
+        int ch = getch();
+        // Assume the bomb destroys the wall in the direction pressed
+        switch (ch)
+        {
         case KEY_UP:
-            if (playerY > 0 && !maze[playerY - 1][playerX].down_w)
+            if (playerY > 0 && maze[playerY - 1][playerX].down_w)
             {
-                playerY--;
-            }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                break;
+                maze[playerY - 1][playerX].down_w = false;
             }
             break;
         case KEY_LEFT:
-            if (playerX > 0 && !maze[playerY][playerX - 1].right_w)
+            if (playerX > 0 && maze[playerY][playerX - 1].right_w)
             {
-                playerX--;
-            }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                break;
+                maze[playerY][playerX - 1].right_w = false;
             }
             break;
         case KEY_DOWN:
-            if (playerY < height - 1 && !maze[playerY + 1][playerX].down_w)
+            if (playerY < height - 1 && maze[playerY + 1][playerX].top_w)
             {
-                playerY++;
-            }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                break;
+                maze[playerY + 1][playerX].top_w = false;
             }
             break;
         case KEY_RIGHT:
-            if (playerX < width - 1 && !maze[playerY][playerX + 1].right_w)
+            if (playerX < width - 1 && maze[playerY][playerX + 1].left_w)
             {
-                playerX++;
+                maze[playerY][playerX + 1].left_w = false;
             }
-            else
-            {
-                mvprintw(0, height + 2, "cant move");
-                // refresh();
-            }
-
-            break;
-        default:
             break;
         }
 
-        refresh(); // Refresh the screen to show the changes
+        break;
+    default:
+        break;
     }
+
+    refresh(); // Refresh the screen to show the changes
 }
