@@ -9,6 +9,11 @@ void updateRank(vector<int>& rank, int time) {
     sort(rank.begin(), rank.end());
 }
 
+void updateInventory(vector<Item>& inventory, Item item) {
+    // Add item to inventory
+    inventory.push_back(item);
+}
+
 void initializeNewGame(GameState& gameState) {
     // Reset player's name
     gameState.player_name = "";
