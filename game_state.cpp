@@ -1,6 +1,11 @@
 #include "game_state.h"
 using namespace std;
 
+void updateRank(vector<int>& rank, int time) {
+    rank.push_back(time);
+    sort(rank.begin(), rank.end());
+}
+
 void initializeNewGame(GameState& gameState) {
     // Reset player's name
     gameState.player_name = "";
