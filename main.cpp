@@ -54,14 +54,14 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
 }
 
 void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y){
-    if (mode=="easy"){
+    if (mode==0){
         width=height=10;
     }
-    else if (mode=="medium"){
+    else if (mode==1){
         width=height=15;
     }
-    else if (mode=="difficult"){
-        width=height=20
+    else if (mode==2){
+        width=height=20;
     }
     else{
         cout<<"Width: ";
@@ -79,7 +79,7 @@ void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y
 }
 int main(){
     GameState game; // Initialize gameState
-    vector<int> time_rank; // Initialize ranking
+    vector<double> time_rank; // Initialize ranking
     
     setlocale(LC_ALL, "");
     
@@ -93,7 +93,7 @@ int main(){
     // INPUT USERNAME
     initscr();
     PrintFromFile("ASCII - Create_User.txt");
-    char ch;
+    int ch;
     while ((ch = getch()) != '\n') {
         if (ch == KEY_BACKSPACE || ch == 127) {
             if (!game.player_name.empty()) {
@@ -113,8 +113,8 @@ int main(){
     cout << "Your user name is " << game.player_name << endl;
 
     int mode, difficulty;
-    mode = choiceUI("mode");
-    difficulty = choiceUI("difficulty");
+    mode = choiceUImode();
+    difficulty = choiceUIdiff();
     cout << "Your mode is " << mode << endl;
     
     // Initialize maze parameters
@@ -150,13 +150,13 @@ int main(){
 
     int player_x = start_x;
     int player_y = start_y;
-
+    double elapsed;
 
     while ((ch = getch()) != 'q') {
         
 
         current_time = time(nullptr);
-        double elapsed = difftime(current_time, start_time);
+        elapsed= difftime(current_time, start_time);
 
         if (elapsed>50||(player_x==end_x&&player_y==end_y)){
             break;
@@ -172,10 +172,10 @@ int main(){
         player_movement(maze,width,height,player_x,player_y,ch);
         
     }
+
+    endwin();
     saveGame(game);
     updateRank(time_rank, elapsed);
-    endwin();
-    
     // Clean up
     for (int i = 0; i < width; i++) {
         delete[] maze[i];
@@ -183,5 +183,3 @@ int main(){
     delete[] maze;
     return 0;
 }
-
-
