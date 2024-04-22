@@ -40,6 +40,7 @@ int main(){
 
     cout << "Your user name is " << game.player_name << endl;
 
+    // Initialize maze parameters
     int width;
     int height;
     int start_x,start_y;
@@ -52,6 +53,12 @@ int main(){
     cin>>start_x;
     cout<<"start_y: ";
     cin>>start_y;
+
+    // Save maze parameters
+    game.width = width;
+    game.height = height;
+    game.player_x = start_x;
+    game.player_y = start_y;
     
     time_t start_time = time(nullptr);
     time_t current_time;
