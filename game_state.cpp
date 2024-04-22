@@ -2,9 +2,8 @@
 using namespace std;
 
 void initializeNewGame(GameState& gameState) {
-    // Set player's initial position
-    gameState.player_x = 0;
-    gameState.player_y = 0;
+    // Reset player's name
+    gameState.player_name = "";
 
     // Initialize inventory
     gameState.inventory.clear();
@@ -12,7 +11,7 @@ void initializeNewGame(GameState& gameState) {
 
 void saveGame(const GameState& gameState) {
     string filename;
-    cout << "File name: " << endl;
+    cout << "File name (end with .txt): " << endl;
     cin >> filename;
     ofstream fout(filename);
 
@@ -31,7 +30,8 @@ void saveGame(const GameState& gameState) {
             fout << gameState.maze[i][j].top_w << " "
                  << gameState.maze[i][j].right_w << " "
                  << gameState.maze[i][j].left_w << " "
-                 << gameState.maze[i][j].down_w << endl;
+                 << gameState.maze[i][j].down_w << " "
+                 << gameState.maze[i][j].revealed << endl;
         }
     }
 
@@ -71,7 +71,8 @@ void loadGame(GameState& gameState, const string& filename) {
             fin >> gameState.maze[i][j].top_w
                 >> gameState.maze[i][j].right_w
                 >> gameState.maze[i][j].left_w
-                >> gameState.maze[i][j].down_w;
+                >> gameState.maze[i][j].down_w
+                >> gameState.maze[i][j].revealed;
         }
     }
 
