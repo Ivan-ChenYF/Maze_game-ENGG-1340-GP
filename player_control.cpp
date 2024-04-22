@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "player_control.h"
 #include "random_maze.h"
+#include "game_state.h"
 #include <ncurses.h>
 
 using namespace std;
@@ -57,7 +58,10 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
             {
                 playerX++;
             }
-
+            
+        case 104:
+            saveGame(game);
+            
         case KEY_UP:
             if (playerY > 0 && !maze[playerY - 1][playerX].down_w)
             {
