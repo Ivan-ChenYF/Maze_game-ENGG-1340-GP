@@ -132,7 +132,6 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
             break;
         }
 
-        break;
     default:
         break;
     }
