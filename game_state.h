@@ -21,6 +21,8 @@ struct GameState {
     Inventory inventory;
 };
 
+vector<int> time_rank;
+
 void initializeNewGame(GameState& gameState);
 void saveGame(const GameState& gameState, const string& filename);
 void loadGame(const GameState& gameState, const string& filename);
