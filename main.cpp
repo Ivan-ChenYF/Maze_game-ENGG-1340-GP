@@ -169,7 +169,7 @@ int main(){
         
     }
     saveGame(game);
-    updateRnak(time_rank, elapsed);
+    updateRank(time_rank, elapsed);
     endwin();
     
     // Clean up
