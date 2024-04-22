@@ -17,16 +17,15 @@ int choiceUI(string choice) {
     getmaxyx(stdscr, maxRows, maxCols);
 
     // 初始化选项
+    const int numOptions = 3;
     if (choice == "mode"){
-        const int numOptions = 3;
         const char* options[numOptions] = {
             "Classic Mode",
             "Frog Mode",
             "End Game"
         };
     }
-    else if (choice == "difficulty"){
-        const int numOptions = 3;
+    else if (choice == "difficulty"){   
         const char* options[numOptions] = {
             "Easy",
             "Medium",
