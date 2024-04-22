@@ -53,7 +53,7 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
     }
 }
 
-void difficult_level(int &width,int &height,int &start_x, int &start_y){
+void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y){
     if (mode=="easy"){
         width=height=10;
     }
@@ -122,9 +122,7 @@ int main(){
     int height;
     int start_x,start_y;
     int end_x,end_y;
-
-    else{
-        fog
+    difficult_level(difficulty,width,height,start_x,start_y);
     time_t start_time = time(nullptr);
     time_t current_time;
     cell** maze = new cell*[width]; //使用动态数组创建maze
