@@ -19,9 +19,8 @@ void initializeNewGame(GameState& gameState) {
 
 void saveGame(const GameState& gameState) {
     // Get filename
-    string filename;
+    string filename = "save_file";
     cout << "File name (end with .txt): " << endl;
-    cin >> filename;
     ofstream fout(filename);
 
     // Write player name
