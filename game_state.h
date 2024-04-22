@@ -23,8 +23,8 @@ struct GameState {
 };
 
 void initializeNewGame(GameState& gameState);
-void updateRank(vector<int>& rank, int time);
-void saveGame(const GameState& gameState, const string& filename);
-void loadGame(const GameState& gameState, const string& filename);
+void updateRank(vector<double>& rank, double time);
+void saveGame(const GameState& gameState);
+void loadGame(const GameState& gameState);
 
 #endif
