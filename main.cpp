@@ -5,7 +5,78 @@
 #include <ncurses.h>
 #include <string>
 using namespace std;
+void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y){
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            maze[i][j].revealed = true;
+        }
+    }
+    clear();
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y);
+    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", elapsed);// Display elapsed time on screen
+    refresh();
+}
+void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y){
+    int centerIndex = 2; // 5x5区域的中心索引
+    int displaySize = 5; // 显示区域尺寸
+    int minX = max(0, player_x - centerIndex);
+    int maxX = min(width - 1, player_x + centerIndex);
+    int minY = max(0, player_y - centerIndex);
+    int maxY = min(height - 1, player_y + centerIndex);
 
+    // 确保显示区域为5x5，如果接近边界，则调整
+    if (maxX - minX < displaySize - 1) {
+        if (minX == 0) maxX = displaySize - 1; // 靠近左边界
+        if (maxX == width - 1) minX = width - displaySize; // 靠近右边界
+    }
+    if (maxY - minY < displaySize - 1) {
+        if (minY == 0) maxY = displaySize - 1; // 靠近上边界
+        if (maxY == height - 1) minY = height - displaySize; // 靠近下边界
+    }
+
+    // 设置显示区域
+    for (int i = minX; i <= maxX; i++) {
+        for (int j = minY; j <= maxY; j++) {
+            maze[i][j].revealed = true;
+        }
+    }
+
+
+    clear();
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y);
+    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", elapsed);// Display elapsed time on screen
+    refresh();
+    for (int i = minX; i <= maxX; i++) {
+        for (int j = minY; j <= maxY; j++) {
+            maze[i][j].revealed = false;
+        }
+    }
+}
+
+void classic(int &width,int &height,int &start_x, int &start_y){
+    if (mode=="easy"){
+        width=height=10;
+    }
+    else if (mode=="medium"){
+        width=height=15;
+    }
+    else if (mode=="difficult"){
+        width=height=20
+    }
+    else{
+        cout<<"Width: ";
+        cin>>width;
+        cout<<"Height: ";
+        cin>>height;
+        cout<<"start_x: ";
+        cin>>start_x;
+        cout<<"start_y: ";
+        cin>>start_y;
+    }
+    srand(time(nullptr));
+    start_x=rand()%width;
+    start_y=rand()%height;
+}
 int main(){
     GameState game; // Initialize gameState
     
@@ -40,25 +111,15 @@ int main(){
 
     cout << "Your user name is " << game.player_name << endl;
 
+
+    
     // Initialize maze parameters
-    int width;
+  int width;
     int height;
     int start_x,start_y;
     int end_x,end_y;
-    cout<<"Width: ";
-    cin>>width;
-    cout<<"Height: ";
-    cin>>height;
-    cout<<"start_x: ";
-    cin>>start_x;
-    cout<<"start_y: ";
-    cin>>start_y;
 
-    // Save maze parameters
-    game.width = width;
-    game.height = height;
-    game.player_x = start_x;
-    game.player_y = start_y;
+    classic(width,height,start_x,start_y);
     
     time_t start_time = time(nullptr);
     time_t current_time;
@@ -81,75 +142,29 @@ int main(){
     
     generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
     printMaze(maze, width,height,start_x,start_y,end_x,end_y);
-    player_movement(maze, width, height, start_x, start_y);
+
     
 
 
     int player_x = start_x;
     int player_y = start_y;
-    int ch;
+
 
     while ((ch = getch()) != 'q') {
-        
-        int centerIndex = 2; // 5x5区域的中心索引
-        int displaySize = 5; // 显示区域尺寸
-        
-        int minX = max(0, player_x - centerIndex);
-        int maxX = min(width - 1, player_x + centerIndex);
-        int minY = max(0, player_y - centerIndex);
-        int maxY = min(height - 1, player_y + centerIndex);
-
-        // 确保显示区域为5x5，如果接近边界，则调整
-        if (maxX - minX < displaySize - 1) {
-            if (minX == 0) maxX = displaySize - 1; // 靠近左边界
-            if (maxX == width - 1) minX = width - displaySize; // 靠近右边界
-        }
-        if (maxY - minY < displaySize - 1) {
-            if (minY == 0) maxY = displaySize - 1; // 靠近上边界
-            if (maxY == height - 1) minY = height - displaySize; // 靠近下边界
-        }
-
-        // 设置显示区域
-        for (int i = minX; i <= maxX; i++) {
-            for (int j = minY; j <= maxY; j++) {
-                maze[i][j].revealed = true;
-            }
-        }
         
 
         current_time = time(nullptr);
         double elapsed = difftime(current_time, start_time);
+
         if (elapsed>50||(player_x==end_x&&player_y==end_y)){
             break;
         }
-        clear();
-        printMaze(maze, width, height, player_x, player_y,end_x,end_y);
-        mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", elapsed);// Display elapsed time on screen
-        refresh();
-
-
-        for (int i = minX; i <= maxX; i++) {
-            for (int j = minY; j <= maxY; j++) {
-                maze[i][j].revealed = false;
-            }
-        }
+        classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y);
         
         if (ch == ERR) continue;
-        //for test only
-        switch(ch) {
-            case KEY_LEFT:
-                if (player_x > 0) player_x--;
-                break;
-            case KEY_RIGHT:
-                if (player_x < width - 1) player_x++;
-                break;
-            case KEY_UP:
-                if (player_y > 0) player_y--;
-                break;
-            case KEY_DOWN:
-                if (player_y < height - 1) player_y++;
-                break;
-        }
+        
+        player_movement(maze,width,height,player_x,player_y,ch);
+        
     }
     endwin();
     
