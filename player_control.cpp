@@ -20,7 +20,7 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
         //  int playerY = start_y, playerX = start_x;
         switch (input)
         {
-        case 119:
+        case 119: //moving up
             if (playerY > 0 && !maze[playerY - 1][playerX].down_w)
             {
                 playerY--;
@@ -31,7 +31,7 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
                 break;
             }
             break;
-        case 97:
+        case 97: //moving left
             if (playerX > 0 && !maze[playerY][playerX - 1].right_w)
             {
                 playerX--;
@@ -42,7 +42,7 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
                 break;
             }
             break;
-        case 115:
+        case 115: //down
             if (playerY < height - 1 && !maze[playerY + 1][playerX].down_w)
             {
                 playerY++;
@@ -53,7 +53,7 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
                 break;
             }
             break;
-        case 100:
+        case 100: //right
             if (playerX < width - 1 && !maze[playerY][playerX + 1].right_w)
             {
                 playerX++;
