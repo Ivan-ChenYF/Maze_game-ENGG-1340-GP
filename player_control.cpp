@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void player_movement(cell **maze, int width, int height, int &playerX, int &playerY, int input)
+void player_movement(cell **&maze, int width, int height, int &playerX, int &playerY, int input)
 {
     // Draw player at initial position
 
@@ -107,27 +107,27 @@ void player_movement(cell **maze, int width, int height, int &playerX, int &play
         switch (ch)
         {
         case KEY_UP:
-            if (playerY > 0 && maze[playerY - 1][playerX].down_w)
+            if (playerY > 0 && maze[playerX][playerY].top_w)
             {
-                maze[playerY - 1][playerX].down_w = false;
+                maze[playerX][playerY].top_w = false;
             }
             break;
         case KEY_LEFT:
-            if (playerX > 0 && maze[playerY][playerX - 1].right_w)
+            if (playerX > 0 && maze[playerX][playerY].left_w)
             {
-                maze[playerY][playerX - 1].right_w = false;
+                maze[playerX][playerY].left_w = false;
             }
             break;
         case KEY_DOWN:
-            if (playerY < height - 1 && maze[playerY + 1][playerX].top_w)
+            if (playerY < height - 1 && maze[playerX][playerY].down_w)
             {
-                maze[playerY + 1][playerX].top_w = false;
+                maze[playerX][playerY].down_w = false;
             }
             break;
         case KEY_RIGHT:
-            if (playerX < width - 1 && maze[playerY][playerX + 1].left_w)
+            if (playerX < width - 1 && maze[playerX][playerY].right_w)
             {
-                maze[playerY][playerX + 1].left_w = false;
+                maze[playerX][playerY].right_w = false;
             }
             break;
         }
