@@ -99,7 +99,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
             mvprintw(0, height + 2, "cant move");
             // refresh();
         }
-    case 'b': // 'b' for bomb
+    case 98: // 'b' for bomb
         mvprintw(0, 2 * height + 1, "You got a bomb, press arrow key to choose wall to destroy");
         refresh();
         int ch = getch();
