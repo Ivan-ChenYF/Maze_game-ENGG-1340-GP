@@ -10,7 +10,10 @@ void initializeNewGame(GameState& gameState) {
     gameState.inventory.clear();
 }
 
-void saveGame(const GameState& gameState, const string& filename) {
+void saveGame(const GameState& gameState) {
+    string filename;
+    cout << "File name: " << endl;
+    cin >> filename;
     ofstream fout(filename);
 
     // Write player name
