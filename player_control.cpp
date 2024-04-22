@@ -101,7 +101,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
     case 98: // 'b' for bomb
         mvprintw(0, 2 * height + 1, "You got a bomb, press arrow key to choose wall to destroy");
-        refresh();
+        //refresh();
         int ch = getch();
         // Assume the bomb destroys the wall in the direction pressed
         switch (ch)
@@ -110,24 +110,28 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
             if (playerY > 0 && maze[playerX][playerY].top_w)
             {
                 maze[playerX][playerY].top_w = false;
+                maze[playerX][playerY-1].down_w = false;
             }
             break;
         case KEY_LEFT:
             if (playerX > 0 && maze[playerX][playerY].left_w)
             {
                 maze[playerX][playerY].left_w = false;
+                maze[playerX-1][playerY].right_w = false;
             }
             break;
         case KEY_DOWN:
             if (playerY < height - 1 && maze[playerX][playerY].down_w)
             {
                 maze[playerX][playerY].down_w = false;
+                maze[playerX][playerY+1].top_w = false;
             }
             break;
         case KEY_RIGHT:
             if (playerX < width - 1 && maze[playerX][playerY].right_w)
             {
                 maze[playerX][playerY].right_w = false;
+                maze[playerX+1][playerY].left_w = false;
             }
             break;
         }
