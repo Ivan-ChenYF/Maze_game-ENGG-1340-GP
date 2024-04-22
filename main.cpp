@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(){
-    gameState game; // Initialize gameState
+    GameState game; // Initialize gameState
     
     setlocale(LC_ALL, "");
     
