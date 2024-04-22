@@ -168,6 +168,8 @@ int main(){
         player_movement(maze,width,height,player_x,player_y,ch);
         
     }
+    saveGame(game);
+    updateRnak(time_rank, elapsed);
     endwin();
     
     // Clean up
