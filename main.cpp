@@ -174,15 +174,23 @@ int main(){
         elapsed= difftime(current_time, start_time);
 
         if (elapsed>timelimit){
+            init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
+            attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
             usleep(100000);
+            clear();
             PrintFromFile("ASCII - Try_Again.txt");
             usleep(2000000);
+            attroff(COLOR_PAIR(1));
             break;
         }
         if (player_x==end_x&&player_y==end_y){
+            init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
+            attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
             usleep(100000);
+            clear();
             PrintFromFile("ASCII - Well_Done.txt");
             usleep(2000000);
+            attroff(COLOR_PAIR(1));
             break;
         }
         if (mode==0){
