@@ -8,7 +8,8 @@ int choiceUI(OptionType optionType) {
     const Option modeOptions[] = {
         {"Classic Mode", 0},
         {"Frog Mode", 1},
-        {"End Game", 2}
+        {"Resume Game", 2},
+        {"End Game", 3}
     };
 
     const Option difficultyOptions[] = {
