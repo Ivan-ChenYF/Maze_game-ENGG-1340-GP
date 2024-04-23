@@ -16,6 +16,6 @@ struct Option {
 };
 
 void PrintFromFile(std::string filename);
-int choiceUI(OptionType optionType);
+int choiceUI(OptionType optionType, string username);
 
 #endif
