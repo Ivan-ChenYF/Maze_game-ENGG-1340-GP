@@ -8,7 +8,7 @@ using namespace std;
 int choiceUI(OptionType optionType, string username) {
     const Option modeOptions[] = {
         {"Classic Mode", 0},
-        {"Frog Mode", 1},
+        {"Fog Mode", 1},
         {"Resume Game", 2},
         {"End Game", 3}
     };
