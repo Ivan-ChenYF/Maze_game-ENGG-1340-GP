@@ -22,18 +22,18 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             break;
         }
         break;
     case 97:
-        if (playerX > 0 && !maze[playerX][playerY].right_w)
+        if (playerX > 0 && !maze[playerX][playerY].left_w)
         {
             playerX--;
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             break;
         }
         break;
@@ -44,7 +44,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             break;
         }
         break;
@@ -53,6 +53,12 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         {
             playerX++;
         }
+        else
+        {
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
+            break;
+        }
+            break;
 
     case KEY_UP:
         if (playerY > 0 && !maze[playerX][playerY].top_w)
@@ -61,7 +67,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             break;
         }
         break;
@@ -72,7 +78,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             break;
         }
         break;
@@ -83,7 +89,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             break;
         }
         break;
@@ -94,48 +100,61 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         else
         {
-            mvprintw(0, height + 2, "cant move");
+            mvprintw(2 * height + 1, 4 * width + 1,"Invalid Move");
             // refresh();
+            break;
         }
+            break;
     case 98: // 'b' for bomb
-        mvprintw(0, 2 * height + 1, "You got a bomb, press arrow key to choose wall to destroy");
-        //refresh();
-        int ch = getch();
-        // Assume the bomb destroys the wall in the direction pressed
-        switch (ch)
-        {
-        case KEY_UP:
-            if (playerY > 0 && maze[playerX][playerY].top_w)
-            {
-                maze[playerX][playerY].top_w = false;
-                maze[playerX][playerY-1].down_w = false;
-            }
-            break;
-        case KEY_LEFT:
-            if (playerX > 0 && maze[playerX][playerY].left_w)
-            {
-                maze[playerX][playerY].left_w = false;
-                maze[playerX-1][playerY].right_w = false;
-            }
-            break;
-        case KEY_DOWN:
-            if (playerY < height - 1 && maze[playerX][playerY].down_w)
-            {
-                maze[playerX][playerY].down_w = false;
-                maze[playerX][playerY+1].top_w = false;
-            }
-            break;
-        case KEY_RIGHT:
-            if (playerX < width - 1 && maze[playerX][playerY].right_w)
-            {
-                maze[playerX][playerY].right_w = false;
-                maze[playerX+1][playerY].left_w = false;
-            }
-            break;
-        }
 
-    default:
-        break;
+            time_t start_time = time(nullptr);
+            time_t current_time;
+            int ch;
+            double elapsed;
+  
+
+            while (true) {
+                current_time = time(nullptr);
+                elapsed = difftime(current_time, start_time);
+                mvprintw(2 * height + 1, 0, "You got a bomb, press arrow key to choose wall to destroy");
+                refresh();
+
+                if (elapsed > 2) {  // 如果超过2秒，退出循环
+                    break;
+                }
+
+                ch = getch();  // 获取键盘输入
+                switch (ch) {
+                    case ERR:  // 如果没有输入，继续循环
+                        continue;
+                    case KEY_UP:
+                        if (playerY > 0 && maze[playerX][playerY].top_w) {
+                            maze[playerX][playerY].top_w = false;
+                            maze[playerX][playerY - 1].down_w = false;
+                        }
+                        break;
+                    case KEY_LEFT:
+                        if (playerX > 0 && maze[playerX][playerY].left_w) {
+                            maze[playerX][playerY].left_w = false;
+                            maze[playerX - 1][playerY].right_w = false;
+                        }
+                        break;
+                    case KEY_DOWN:
+                        if (playerY < height - 1 && maze[playerX][playerY].down_w) {
+                            maze[playerX][playerY].down_w = false;
+                            maze[playerX][playerY + 1].top_w = false;
+                        }
+                        break;
+                    case KEY_RIGHT:
+                        if (playerX < width - 1 && maze[playerX][playerY].right_w) {
+                            maze[playerX][playerY].right_w = false;
+                            maze[playerX + 1][playerY].left_w = false;
+                        }
+                        break;
+                }
+                break;  // 一旦接收到有效输入即退出循环
+            }
+
     }
 
     refresh(); // Refresh the screen to show the changes
