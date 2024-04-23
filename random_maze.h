@@ -12,7 +12,7 @@ struct cell {
 
 void init(cell* now, int initX, int initY);
 void generateMaze(cell** &maze, int width, int height, int start_x, int start_y,int &end_x,int &end_y);
-void printMaze(cell** maze, int width, int height, int player_x, int player_y,int end_x,int end_y);
+void printMaze(cell** maze, int width, int height, int player_x, int player_y,int end_x,int end_y,int bomb);
 void PrintFromFile(std::string filename);
 int choiceUImode();
 int choiceUIdiff();
