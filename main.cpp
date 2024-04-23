@@ -54,15 +54,18 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
     }
 }
 
-void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y){
+void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y, int &timelimit){
     if (mode==0){
         width=height=10;
+        timelimit=40;
     }
     else if (mode==1){
         width=height=15;
+        timelimit=60;
     }
     else if (mode==2){
         width=height=20;
+        timelimit=80;
     }
     else{
         cout<<"Width: ";
@@ -121,8 +124,8 @@ int main(){
     int width;
     int height;
     int start_x,start_y;
-    int end_x,end_y;
-    difficult_level(difficulty,width,height,start_x,start_y);
+    int end_x,end_y, timelimit;
+    difficult_level(difficulty,width,height,start_x,start_y,timelimit);
     time_t start_time = time(nullptr);
     time_t current_time;
     
@@ -159,7 +162,7 @@ int main(){
         current_time = time(nullptr);
         elapsed= difftime(current_time, start_time);
 
-        if (elapsed>50||(player_x==end_x&&player_y==end_y)){
+        if (elapsed>timelimit||(player_x==end_x&&player_y==end_y)){
             break;
         }
         if (mode==0){
@@ -175,8 +178,6 @@ int main(){
     }
 
     endwin();
-    saveGame(game);
-    updateRank(time_rank, elapsed);
     // Clean up
     for (int i = 0; i < width; i++) {
         delete[] maze[i];
