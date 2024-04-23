@@ -1,7 +1,7 @@
 #include "random_maze.h"
 #include "game_state.h"
 #include "player_control.h"
-#include "main_menu.h" //I am not sure if it is useful
+#include "user_interface.h"
 #include <iostream>
 #include <ncurses.h>
 #include <string>
@@ -113,9 +113,8 @@ int main(){
 
     cout << "Your user name is " << game.player_name << endl;
 
-    int mode, difficulty;
-    mode = choiceUImode();
-    difficulty = choiceUIdiff();
+    int mode = choiceUI(MODE);
+    int difficulty = choiceUI(DIFFICULTY);
     cout << "Your mode is " << mode << endl;
     
     // Initialize maze parameters
@@ -185,6 +184,5 @@ int main(){
     delete[] maze;
     return 0;
 }
-
 
 

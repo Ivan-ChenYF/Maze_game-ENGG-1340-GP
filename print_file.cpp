@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "random_maze.h"
+#include "user_interface.h"
 using namespace std;
 
 void PrintFromFile(string filename){
