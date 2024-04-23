@@ -16,7 +16,8 @@ int choiceUI(OptionType optionType, string username) {
     const Option difficultyOptions[] = {
         {"Easy", 0},
         {"Medium", 1},
-        {"Difficult", 2}
+        {"Difficult", 2},
+        {"Customize", 3}
     };
 
     const Option* options;
