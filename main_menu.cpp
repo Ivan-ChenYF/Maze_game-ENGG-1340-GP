@@ -1,10 +1,11 @@
 #include <ncurses.h>
 #include <cstring>
 #include <string>
+#include <unistd.h>
 #include "user_interface.h"
 using namespace std;
 
-int choiceUI(OptionType optionType, string username); {
+int choiceUI(OptionType optionType, string username) {
     const Option modeOptions[] = {
         {"Classic Mode", 0},
         {"Frog Mode", 1},
@@ -57,8 +58,8 @@ int choiceUI(OptionType optionType, string username); {
                 attron(A_REVERSE);
                 attron(COLOR_PAIR(1));
             }
-            mvprintw(9 + i, 2, "· ");
-            mvprintw(9 + i, 4, options[i].text);
+            mvprintw(11 + i, 2, "· ");
+            mvprintw(11 + i, 4, options[i].text);
             attroff(A_REVERSE);
             attroff(COLOR_PAIR(1));
         }
@@ -78,11 +79,14 @@ int choiceUI(OptionType optionType, string username); {
             case '\n':
                 // 用户按下Enter键，选择当前选项
                 clear();
-                mvprintw(maxRows/2, maxCols/2 - strlen(options[currentOption].text)/2, "Selected: %s", options[currentOption].text);
+                mvprintw(maxRows/2 - 1, maxCols/2 - (strlen(options[currentOption].text) + 10)/2, "Selected: %s", options[currentOption].text);
                 refresh();
-                getch();
+                usleep(700000);
+                mvprintw(maxRows/2, maxCols/2 - strlen("Loading...")/2, "Loading...");
+                refresh();
+                usleep(1900000);
                 clear();
-                endwin();
+                refresh();
                 return options[currentOption].value;
         }
     }
