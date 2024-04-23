@@ -1,4 +1,5 @@
 #include "game_state.h"
+#include <iostream>
 using namespace std;
 
 void updateRank(vector<int>& rank, int time) {
@@ -99,7 +100,7 @@ void loadGame(GameState& gameState, const string& filename) {
         
         for (int i = 0; i < inventory_size; i++) {
             fin >> gameState.inventory[i].name
-                >> gameState.inventory[i].quantity
+            >> gameState.inventory[i].quantity;
         }
     }
     else {
