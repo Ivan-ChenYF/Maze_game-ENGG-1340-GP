@@ -61,7 +61,7 @@ void saveGame(const GameState& gameState) {
     fout.close();
 }
 
-void loadGame(GameState& gameState, const string& filename) {
+void loadGame(GameState& gameState) {
     string filename;
     cout << "File name (end with .txt): " << endl;
     cin >> filename;
