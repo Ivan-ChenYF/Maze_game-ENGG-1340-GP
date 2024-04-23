@@ -29,7 +29,7 @@ Here is an overview of the key files and their functions in the project:
 **Source Code**
 - `main.cpp`: The main entry point for the game, responsible for initialization and setup.
 - `game_state.cpp` and `game_state.h`: Handles the game state, including player position, score, and maze information.
-- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes, using DFS algorithms.
+- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes, relying on DFS algorithms that uses the backtracking principle
 - `player_control.cpp` and `player_control.h`: Manages player controls, movement logic and bomb function.
 - `print_maze.cpp`: Responsible for printing and displaying maze content.
 - `main_menu.cpp` and `main_menu.h`: Contains logic for the main menu.
@@ -46,19 +46,20 @@ Here is an overview of the key files and their functions in the project:
 To run the game, you'll need a C++ compiler and a terminal or command prompt. Follow these steps to compile and start the game:
 
 1. **Clone the Repository**
-   - Download or clone the project to your local machine.
+   - Open the Terminal in your computer.
+   - Download or clone the project to your local machine by using the command line here.
      ```bash
      git clone https://github.com/Ivan-ChenYF/ENGG-1340-GP.git
      ```
 
-2. **Compile the Code**
+3. **Compile the Code**
    - Open a terminal in the project's root directory.
    - Compile the source code. With Makefile, you can use the following command to create an executable file:
      ```bash
      make compile
      ```
 
-3. **Run the Game**
+4. **Run the Game**
    - Once the code is compiled, you can run the executable to start the game:
      ```bash
      make run
