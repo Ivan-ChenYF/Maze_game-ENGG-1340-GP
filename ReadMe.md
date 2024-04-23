@@ -53,7 +53,7 @@ To run the game, you'll need a C++ compiler and a terminal or command prompt. Fo
      ```
 
 3. **Compile the Code**
-   - Open a terminal in the project's root directory.
+   - Switch to the directory where you clone the game
    - Compile the source code. With Makefile, you can use the following command to create an executable file:
      ```bash
      make compile
@@ -71,6 +71,7 @@ After launching the game, follow the on-screen instructions to create a user and
 ### Game Controls
 - **Movement**: Use arrow keys or specific letters (`w`, `a`, `s`, `d`) to move through the maze.
 - **Pause/Exit**: Use a designated key to pause or exit the game (e.g., `q` to quit).
+- **Bomb**: Use a `b` key to pick up the bomb, then use the arrow keys to select the direction of the wall you want to destroy.
 
 ### Gameplay Mechanics
 - **Maze Navigation**: The maze is randomly generated, so each playthrough is unique.
