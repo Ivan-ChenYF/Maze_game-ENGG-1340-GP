@@ -39,6 +39,9 @@ To run the game, you'll need a C++ compiler and a terminal or command prompt. Fo
 
 1. **Clone the Repository**
    - Download or clone the project to your local machine.
+     ```bash
+     git clone https://github.com/Ivan-ChenYF/ENGG-1340-GP.git
+     ```
 
 2. **Compile the Code**
    - Open a terminal in the project's root directory.
