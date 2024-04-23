@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include <string>
+#include <unistd.h>
 using namespace std;
 void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y){
     for (int i = 0; i < width; i++) {
@@ -54,18 +55,15 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
     }
 }
 
-void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y, int &timelimit){
+void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y){
     if (mode==0){
         width=height=10;
-        timelimit=40;
     }
     else if (mode==1){
         width=height=15;
-        timelimit=60;
     }
     else if (mode==2){
         width=height=20;
-        timelimit=80;
     }
     else{
         cout<<"Width: ";
@@ -88,13 +86,13 @@ int main(){
     setlocale(LC_ALL, "");
     
     // LOADING PAGE
+    initscr();
     PrintFromFile("ASCII - Enigma_Maze.txt");
     getch();
     clear();
     refresh();
 
     // INPUT USERNAME
-    initscr();
     PrintFromFile("ASCII - Create_User.txt");
     int ch;
     while ((ch = getch()) != '\n') {
@@ -116,6 +114,9 @@ int main(){
     cout << "Your user name is " << game.player_name << endl;
 
     int mode = choiceUI(MODE, game.player_name);
+    if (mode == 2){
+        
+    }
     int difficulty = choiceUI(DIFFICULTY, game.player_name);
     cout << "Your mode is " << mode << endl;
     
@@ -123,8 +124,8 @@ int main(){
     int width;
     int height;
     int start_x,start_y;
-    int end_x,end_y, timelimit;
-    difficult_level(difficulty,width,height,start_x,start_y,timelimit);
+    int end_x,end_y;
+    difficult_level(difficulty,width,height,start_x,start_y);
     time_t start_time = time(nullptr);
     time_t current_time;
     
@@ -161,7 +162,16 @@ int main(){
         current_time = time(nullptr);
         elapsed= difftime(current_time, start_time);
 
-        if (elapsed>timelimit||(player_x==end_x&&player_y==end_y)){
+        if (elapsed>50){
+            usleep(100000);
+            PrintFromFile("ASCII - Try_Again.txt");
+            usleep(2000000);
+            break;
+        }
+        if (player_x==end_x&&player_y==end_y){
+            usleep(100000);
+            PrintFromFile("ASCII - Well_Done.txt");
+            usleep(2000000);
             break;
         }
         if (mode==0){
@@ -177,6 +187,7 @@ int main(){
     }
 
     endwin();
+
     // Clean up
     for (int i = 0; i < width; i++) {
         delete[] maze[i];
