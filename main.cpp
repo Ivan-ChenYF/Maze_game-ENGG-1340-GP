@@ -88,11 +88,10 @@ int main(){
     setlocale(LC_ALL, "");
     
     // LOADING PAGE
-    initscr();
     PrintFromFile("ASCII - Enigma_Maze.txt");
     getch();
     clear();
-    endwin();
+    refresh();
 
     // INPUT USERNAME
     initscr();
@@ -112,7 +111,7 @@ int main(){
         }
     }
     clear();
-    endwin();
+    refresh();
 
     cout << "Your user name is " << game.player_name << endl;
 
