@@ -8,20 +8,26 @@ using namespace std;
 
 
 
-void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y,int bomb) {
+void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y,int bomb,double elapsed) {
 
     
     start_color();          // 启动颜色功能
+    
+    use_default_colors();
+    if (can_change_color() && COLORS >= 256) {
+        init_color(COLOR_WHITE, 1000, 1000, 1000); // 尝试设定纯白色
+    }
     init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
 
-    bkgd(COLOR_PAIR(1));    // 设置默认背景颜色为白色
+    init_pair(3, COLOR_WHITE, COLOR_WHITE);
+    bkgd(COLOR_PAIR(3));
     attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
     
     init_pair(2, COLOR_GREEN, COLOR_GREEN);
    
     mvprintw(2 * end_y + 1, 4 * end_x + 1, "📍");
 
-    
+    mvprintw(2*height+2, 0, "Time left: %.0f seconds", elapsed);
     mvaddch(2 * player_y + 1, 4 * player_x + 2, '@');
     mvprintw(2 * height + 2, 4 * width + 1, "Bomb: %d", bomb);
     // The corner and edges need to be handled for the entire grid
