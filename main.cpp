@@ -7,18 +7,18 @@
 #include <string>
 #include <unistd.h>
 using namespace std;
-void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y){
+void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y,int timelimit,int bomb){
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             maze[i][j].revealed = true;
         }
     }
     clear();
-    printMaze(maze, width, height, player_x, player_y,end_x,end_y);
-    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", elapsed);// Display elapsed time on screen
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb);
+    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", timelimit-elapsed);// Display elapsed time on screen
     refresh();
 }
-void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y){
+void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y, int timelimit,int bomb){
     int centerIndex = 2; // 5x5区域的中心索引
     int displaySize = 5; // 显示区域尺寸
     int minX = max(0, player_x - centerIndex);
@@ -45,8 +45,8 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
 
 
     clear();
-    printMaze(maze, width, height, player_x, player_y,end_x,end_y);
-    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", elapsed);// Display elapsed time on screen
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb);
+    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", timelimit-elapsed);// Display elapsed time on screen
     refresh();
     for (int i = minX; i <= maxX; i++) {
         for (int j = minY; j <= maxY; j++) {
@@ -55,15 +55,21 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
     }
 }
 
-void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y){
+void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y,int &timelimit,int &bomb){
     if (mode==0){
         width=height=10;
+        timelimit=60;
+        bomb=1;
     }
     else if (mode==1){
         width=height=15;
+        timelimit=100;
+        bomb=2;
     }
     else if (mode==2){
         width=height=20;
+        timelimit=140;
+        bomb=3;
     }
     else{
         cout<<"Width: ";
@@ -80,6 +86,8 @@ void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y
     start_y=rand()%height;
 }
 int main(){
+    int bomb=0;
+    int timelimit;
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
     
@@ -125,7 +133,7 @@ int main(){
     int height;
     int start_x,start_y;
     int end_x,end_y;
-    difficult_level(difficulty,width,height,start_x,start_y);
+    difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb);
     time_t start_time = time(nullptr);
     time_t current_time;
     
@@ -147,7 +155,7 @@ int main(){
     
     
     generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
-    printMaze(maze, width,height,start_x,start_y,end_x,end_y);
+    printMaze(maze, width,height,start_x,start_y,end_x,end_y,bomb);
 
     
 
@@ -162,7 +170,7 @@ int main(){
         current_time = time(nullptr);
         elapsed= difftime(current_time, start_time);
 
-        if (elapsed>50){
+        if (elapsed>timelimit){
             usleep(100000);
             PrintFromFile("ASCII - Try_Again.txt");
             usleep(2000000);
@@ -175,14 +183,14 @@ int main(){
             break;
         }
         if (mode==0){
-            classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y);
+            classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y,timelimit,bomb);
         }
         else{
-            fog_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y);
+            fog_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y, timelimit,bomb);
         }
         if (ch == ERR) continue;
         
-        player_movement(maze,width,height,player_x,player_y,ch);
+        player_movement(maze,width,height,player_x,player_y,ch,bomb);
         
     }
 
@@ -195,5 +203,7 @@ int main(){
     delete[] maze;
     return 0;
 }
+
+
 
 
