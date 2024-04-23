@@ -18,7 +18,7 @@ The Enigma Maze Game is a simple ASCII-based maze game where players can create 
 ## Project Structure
 Here is an overview of the key files and their functions in the project:
 
-### Source Code Files
+**Source Code**
 - `main.cpp`: The main entry point for the game, responsible for initialization and setup.
 - `game_state.cpp` and `game_state.h`: Handles the game state, including player position, score, and maze information.
 - `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes.
@@ -28,7 +28,7 @@ Here is an overview of the key files and their functions in the project:
 - `print_file.cpp`: Handles the printing of files and interface components.
 - `user_interface.h`: Defines functions related to the user interface.
 
-### ASCII Art Files
+**ASCII Art Files**
 - `ASCII - Create_User.txt`: ASCII art for the user creation screen.
 - `ASCII - Main_Menu.txt`: ASCII art for the main menu.
 - `ASCII - Enigma_Maze.txt`: ASCII art for the game title screen.
