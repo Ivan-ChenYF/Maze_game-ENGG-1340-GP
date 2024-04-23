@@ -69,9 +69,11 @@ After launching the game, follow the on-screen instructions to create a user and
 - **Score**: Depending on the game's structure, there may be a scoring system based on completion time or other factors.
 
 ## Contributors
-- **ENGG1340 Group 41**: Main developers and designers of the Enigma Maze Game.
-- **YIFAN CHEN**
-- **  **
+ **Main developers and designers of the Enigma Maze Game:**
+- **YIFAN CHEN  3036253809 ivan2004@connect.hku.hk**
+- **Xie Yee Lam  3036222719  bylinmou@connect.hku.hk**
+- **Wu Yu Kwan  3036003670  yukwan24@connect.hku.hk**
+- **Lok Hoi Cheuk  3036066763  tlhc@connect.hku.hk**
 
 ## License
 
