@@ -33,7 +33,7 @@ Here is an overview of the key files and their functions in the project:
 - `player_control.cpp` and `player_control.h`: Manages player controls, movement logic and bomb function.
 - `print_maze.cpp`: Responsible for printing and displaying maze content.
 - `main_menu.cpp` and `main_menu.h`: Contains logic for the main menu.
-- `print_file.cpp`: Handles the printing of files and interface components.
+- `print_file.cpp`: Handles the printing of files and interface components, including features like displaying ASCII art and accepting user names to engage player
 - `user_interface.h`: Defines functions related to the user interface.
 
 **ASCII Art Files**
