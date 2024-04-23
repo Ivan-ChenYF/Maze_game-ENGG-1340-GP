@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y) {
+void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y,int bomb) {
 
     
     start_color();          // 启动颜色功能
@@ -23,7 +23,7 @@ void printMaze(cell** maze, int width, int height, int player_x,int player_y,int
 
     
     mvaddch(2 * player_y + 1, 4 * player_x + 2, '@');
-
+    mvprintw(2 * height + 2, 4 * width + 1, "Bomb: %d", bomb);
     // The corner and edges need to be handled for the entire grid
     for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
