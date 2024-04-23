@@ -4,7 +4,7 @@
 #include "user_interface.h"
 using namespace std;
 
-int choiceUI(OptionType optionType) {
+int choiceUI(OptionType optionType, string username); {
     const Option modeOptions[] = {
         {"Classic Mode", 0},
         {"Frog Mode", 1},
@@ -48,6 +48,7 @@ int choiceUI(OptionType optionType) {
         // 清空屏幕
         clear();
         PrintFromFile("ASCII - Main_Menu.txt");
+        mvprintw(9, 0, (" Hi, " + username + ".").c_str());
 
         // 打印选项
         for (int i = 0; i < numOptions; i++) {
