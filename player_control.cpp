@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include <termios.h>
-#include <unistd.h>
 #include "player_control.h"
 #include "random_maze.h"
 #include <ncurses.h>
