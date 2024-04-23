@@ -18,16 +18,21 @@ The Enigma Maze Game is a simple ASCII-based maze game where players can create 
 ## Project Structure
 Here is an overview of the key files and their functions in the project:
 
-- **Source Code**
-  - `random_maze.cpp`: Contains the main game logic and random maze generation functions.
-  - `random_maze.h`: Header file for maze-related definitions and functions.
-  - `user_interface.h`: Header file for the user interface functions.
+### Source Code Files
+- `main.cpp`: The main entry point for the game, responsible for initialization and setup.
+- `game_state.cpp` and `game_state.h`: Handles the game state, including player position, score, and maze information.
+- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes.
+- `player_control.cpp` and `player_control.h`: Manages player controls and movement logic.
+- `print_maze.cpp`: Responsible for printing and displaying maze content.
+- `main_menu.cpp` and `main_menu.h`: Contains logic for the main menu.
+- `print_file.cpp`: Handles the printing of files and interface components.
+- `user_interface.h`: Defines functions related to the user interface.
 
-- **ASCII Art Files**
-  - `ASCII - Create_User.txt`: ASCII art for the user creation menu.
-  - `ASCII - Main_Menu.txt`: ASCII art for the main menu screen.
-  - `ASCII - Enigma_Maze.txt`: ASCII art for the game title screen.
-  - `ASCII - End.txt`: ASCII art for the game ending screen.
+### ASCII Art Files
+- `ASCII - Create_User.txt`: ASCII art for the user creation screen.
+- `ASCII - Main_Menu.txt`: ASCII art for the main menu.
+- `ASCII - Enigma_Maze.txt`: ASCII art for the game title screen.
+- `ASCII - End.txt`: ASCII art for the end-of-game screen.
 
 ## Installation and Setup
 To run the game, you'll need a C++ compiler and a terminal or command prompt. Follow these steps to compile and start the game:
