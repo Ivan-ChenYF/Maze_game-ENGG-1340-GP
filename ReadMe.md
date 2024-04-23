@@ -27,7 +27,7 @@ The Enigma Maze Game is a simple text maze game based on ncurses library where p
 Here is an overview of the key files and their functions in the project:
 
 **Source Code**
-- `main.cpp`: The main entry point for the game, responsible for initialization and setup.
+- `main.cpp`: The main entry point for the game, responsible for initialization and setup. It allows the player to choose the game mode they want.
 - `game_state.cpp` and `game_state.h`: Handles the game state, including player position, score, and maze information.
 - `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes, relying on DFS algorithms that uses the backtracking principle and providing unqie maze for each play.
 - `player_control.cpp` and `player_control.h`: Manages player controls, movement logic and bomb function.
