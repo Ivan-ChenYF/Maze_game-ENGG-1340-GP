@@ -69,6 +69,11 @@ void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y
         timelimit=140;
         bomb=3;
     }
+    else if (mode==3){
+        customize(width, height, start_x, start_y);
+        timelimit=140;
+        bomb=3;
+    }
     else{
         cout<<"Width: ";
         cin>>width;
