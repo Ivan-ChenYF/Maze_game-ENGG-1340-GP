@@ -14,8 +14,7 @@ void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,
         }
     }
     clear();
-    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb);
-    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", timelimit-elapsed);// Display elapsed time on screen
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb,timelimit-elapsed);
     refresh();
 }
 void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y, int timelimit,int bomb){
@@ -45,8 +44,7 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
 
 
     clear();
-    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb);
-    mvprintw(2*height+1, 0, "Time elapsed: %.0f seconds", timelimit-elapsed);// Display elapsed time on screen
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb,timelimit-elapsed);
     refresh();
     for (int i = minX; i <= maxX; i++) {
         for (int j = minY; j <= maxY; j++) {
@@ -155,7 +153,7 @@ int main(){
     
     
     generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
-    printMaze(maze, width,height,start_x,start_y,end_x,end_y,bomb);
+
 
     
 
