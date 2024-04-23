@@ -13,7 +13,7 @@ Welcome to the Enigma Maze Game! This project is a text-based maze game where pl
 - [License](#license)
 
 ## Project Overview
-The Enigma Maze Game is a simple ASCII-based maze game where players can create user profiles, explore a randomly generated maze, and try to reach the end. The game features ASCII art, interactive menus, and a variety of gameplay options.
+The Enigma Maze Game is a simple text maze game based on ncurses library where players can create user profiles, explore a randomly generated maze, and try to reach the end. The game features ASCII art, interactive menus, and a variety of gameplay options.
 
 ## Project Structure
 Here is an overview of the key files and their functions in the project:
@@ -21,8 +21,8 @@ Here is an overview of the key files and their functions in the project:
 **Source Code**
 - `main.cpp`: The main entry point for the game, responsible for initialization and setup.
 - `game_state.cpp` and `game_state.h`: Handles the game state, including player position, score, and maze information.
-- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes.
-- `player_control.cpp` and `player_control.h`: Manages player controls and movement logic.
+- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes, using DFS algorithms.
+- `player_control.cpp` and `player_control.h`: Manages player controls, movement logic and bomb function.
 - `print_maze.cpp`: Responsible for printing and displaying maze content.
 - `main_menu.cpp` and `main_menu.h`: Contains logic for the main menu.
 - `print_file.cpp`: Handles the printing of files and interface components.
@@ -71,7 +71,7 @@ After launching the game, follow the on-screen instructions to create a user and
 ## Contributors
 - **ENGG1340 Group 41**: Main developers and designers of the Enigma Maze Game.
 - **YIFAN CHEN**
-- ****
+- **  **
 
 ## License
 
