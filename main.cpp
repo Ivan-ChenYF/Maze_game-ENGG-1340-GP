@@ -1,7 +1,7 @@
 #include "random_maze.h"
 #include "game_state.h"
 #include "player_control.h"
-#include "main_menu.h"
+#include "main_menu.h" //I am not sure if it is useful
 #include <iostream>
 #include <ncurses.h>
 #include <string>
