@@ -116,8 +116,8 @@ int main(){
 
     cout << "Your user name is " << game.player_name << endl;
 
-    int mode = choiceUI(MODE);
-    int difficulty = choiceUI(DIFFICULTY);
+    int mode = choiceUI(MODE, game.player_name);
+    int difficulty = choiceUI(DIFFICULTY, game.player_name);
     cout << "Your mode is " << mode << endl;
     
     // Initialize maze parameters
