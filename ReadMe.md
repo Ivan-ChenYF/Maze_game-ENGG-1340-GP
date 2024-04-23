@@ -29,7 +29,7 @@ Here is an overview of the key files and their functions in the project:
 **Source Code**
 - `main.cpp`: The main entry point for the game, responsible for initialization and setup.
 - `game_state.cpp` and `game_state.h`: Handles the game state, including player position, score, and maze information.
-- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes, relying on DFS algorithms that uses the backtracking principle
+- `random_maze.cpp` and `random_maze.h`: Contains the logic for generating random mazes, relying on DFS algorithms that uses the backtracking principle and providing unqie game play experience
 - `player_control.cpp` and `player_control.h`: Manages player controls, movement logic and bomb function.
 - `print_maze.cpp`: Responsible for printing and displaying maze content.
 - `main_menu.cpp` and `main_menu.h`: Contains logic for the main menu.
