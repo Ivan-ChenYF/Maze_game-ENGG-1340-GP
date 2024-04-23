@@ -125,6 +125,7 @@ int main(){
     difficult_level(difficulty,width,height,start_x,start_y);
     time_t start_time = time(nullptr);
     time_t current_time;
+    
     cell** maze = new cell*[width]; //使用动态数组创建maze
     for (int i = 0; i < width; ++i) {
         maze[i] = new cell [height];
@@ -183,3 +184,6 @@ int main(){
     delete[] maze;
     return 0;
 }
+
+
+
