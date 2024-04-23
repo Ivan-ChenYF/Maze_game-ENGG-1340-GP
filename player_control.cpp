@@ -7,12 +7,15 @@
 
 using namespace std;
 
-void player_movement(cell **&maze, int width, int height, int &playerX, int &playerY, int input)
+void player_movement(cell **&maze, int width, int height, int &playerX, int &playerY, int input, int &bomb)
 {
     // Draw player at initial position
 
     // char input = getSingleKeyPress();
     //  int playerY = start_y, playerX = start_x;
+    start_color();          // 启动颜色功能
+    init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
+    attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
     switch (input)
     {
     case 119:
@@ -129,24 +132,28 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
                         continue;
                     case KEY_UP:
                         if (playerY > 0 && maze[playerX][playerY].top_w) {
+                            bomb--;
                             maze[playerX][playerY].top_w = false;
                             maze[playerX][playerY - 1].down_w = false;
                         }
                         break;
                     case KEY_LEFT:
                         if (playerX > 0 && maze[playerX][playerY].left_w) {
+                            bomb--;
                             maze[playerX][playerY].left_w = false;
                             maze[playerX - 1][playerY].right_w = false;
                         }
                         break;
                     case KEY_DOWN:
                         if (playerY < height - 1 && maze[playerX][playerY].down_w) {
+                            bomb--;
                             maze[playerX][playerY].down_w = false;
                             maze[playerX][playerY + 1].top_w = false;
                         }
                         break;
                     case KEY_RIGHT:
                         if (playerX < width - 1 && maze[playerX][playerY].right_w) {
+                            bomb--;
                             maze[playerX][playerY].right_w = false;
                             maze[playerX + 1][playerY].left_w = false;
                         }
@@ -156,6 +163,6 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
             }
 
     }
-
+    attroff(COLOR_PAIR(1)); // 关闭颜色属性
     refresh(); // Refresh the screen to show the changes
 }
