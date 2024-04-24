@@ -169,8 +169,9 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         mvprintw(2 * height + 1, 4 * width + 1, "No Bomb");
     }
-    refresh();
+    
     attroff(COLOR_PAIR(1)); // 关闭颜色属性   // Refresh the screen to show the changes
+    refresh();
 }
 
 
