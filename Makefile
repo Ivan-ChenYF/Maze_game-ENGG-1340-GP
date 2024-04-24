@@ -1,7 +1,7 @@
 FLAGS = -pedantic-errors -std=c++11
 
 maze: main.o random_maze.o print_file.o print_maze.o main_menu.o player_control.o game_state.o
-	g++  $(FLAGS) -o maze main.o random_maze.o  print_maze.o print_file.o main_menu.o player_control.o game_state.o -lncurses
+	g++  $(FLAGS) -o maze main.o random_maze.o  print_maze.o print_file.o main_menu.o player_control.o game_state.o -lncursesw
 
 main.o: main.cpp random_maze.h user_interface.h
 	g++ $(FLAGS) -c main.cpp
