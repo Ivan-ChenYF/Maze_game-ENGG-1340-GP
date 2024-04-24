@@ -102,20 +102,21 @@ int main(){
     refresh();
 
     // INPUT USERNAME
-    PrintFromFile("ASCII - Create_User.txt");
     int ch;
+    PrintFromFile("ASCII - Create_User.txt");
     while ((ch = getch()) != '\n') {
         if (ch == KEY_BACKSPACE || ch == 127) {
             if (!game.player_name.empty()) {
                 game.player_name.pop_back();
-                move(getcury(stdscr), getcurx(stdscr) - 1);
-                mvdelch(getcury(stdscr), getcurx(stdscr));
                 refresh();
             }
         } else {
             game.player_name.push_back(ch);
             refresh();
         }
+        clear();
+        PrintFromFile("ASCII - Create_User.txt");
+        printw(game.player_name.c_str());
     }
     clear();
     refresh();
