@@ -45,11 +45,11 @@ Here is an overview of the key files and their functions in the project:
 **coding requirements**
 - ✅ Generation of random game sets or events
 - ✅ Data structures for storing game status (e.g., arrays, STL containers)
-✅ Dynamic memory management (e.g., dynamic arrays, linked lists, STL containers)
-✅ File input/output (e.g., for loading/saving game status)
-✅ Program codes in multiple files (recall separate compilation)
-✅ Proper indentation and naming styles
-✅ In-code documentation
+- ✅ Dynamic memory management (e.g., dynamic arrays, linked lists, STL containers)
+- ✅ File input/output (e.g., for loading/saving game status)
+- ✅ Program codes in multiple files (recall separate compilation)
+- ✅ Proper indentation and naming styles
+- ✅ In-code documentation
 
 ## Installation and Setup
 To run the game, you'll need a C++ compiler and a terminal or command prompt. Follow these steps to compile and start the game:
