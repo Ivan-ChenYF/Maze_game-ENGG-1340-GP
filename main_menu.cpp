@@ -162,6 +162,12 @@ void customize(int &width, int &height, int &timelimit, int &bomb, string userna
                 if (value.empty()) 
                     allFilled = false;
             invalid = false;
+            for (const auto& value : values[currentField])
+                if (value < '0' || value > '9'){
+                    invalid = true;
+                }
+            if (invalid)
+                continue;
             if (values[currentField].empty()){
                 currentField = (currentField + 1) % 4;
                 continue;
