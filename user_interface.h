@@ -17,6 +17,6 @@ struct Option {
 
 void PrintFromFile(std::string filename);
 int choiceUI(OptionType optionType, string username);
-void customize(int &width, int &height, int &start_x, int &start_y);
+void customize(int &width, int &height, int &timelimit, int &bomb, string username);
 
 #endif
