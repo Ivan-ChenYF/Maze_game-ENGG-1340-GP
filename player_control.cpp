@@ -1,174 +1,100 @@
 #include <iostream>
-#include <vector>
-#include <stack>
-#include "player_control.h"
-#include "random_maze.h"
+#include <ctime>
 #include <ncurses.h>
-
+#include "random_maze.h"
 using namespace std;
 
-void player_movement(cell **&maze, int width, int height, int &playerX, int &playerY, int input, int &bomb)
-{
-    // Draw player at initial position
 
-    // char input = getSingleKeyPress();
-    //  int playerY = start_y, playerX = start_x;
-    start_color();                        // 启动颜色功能
+
+
+
+void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y,int bomb,double elapsed) {
+
+    
+    start_color();          // 启动颜色功能
+    
+    use_default_colors();
+    if (can_change_color() && COLORS >= 256) {
+        init_color(COLOR_WHITE, 1000, 1000, 1000); // 尝试设定纯白色
+    }
     init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
-    attron(COLOR_PAIR(1));                // 使用红色前景和白色背景
-    switch (input)
-    {
-    case 119:
-        if (playerY > 0 && !maze[playerX][playerY].top_w)
-        {
-            playerY--;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
-    case 97:
-        if (playerX > 0 && !maze[playerX][playerY].left_w)
-        {
-            playerX--;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
-    case 115:
-        if (playerY < height - 1 && !maze[playerX][playerY].down_w)
-        {
-            playerY++;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
-    case 100:
-        if (playerX < width - 1 && !maze[playerX][playerY].right_w)
-        {
-            playerX++;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
 
-    case KEY_UP:
-        if (playerY > 0 && !maze[playerX][playerY].top_w)
-        {
-            playerY--;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
-    case KEY_LEFT:
-        if (playerX > 0 && !maze[playerX][playerY].left_w)
-        {
-            playerX--;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
-    case KEY_DOWN:
-        if (playerY < height - 1 && !maze[playerX][playerY].down_w)
-        {
-            playerY++;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            break;
-        }
-        break;
-    case KEY_RIGHT:
-        if (playerX < width - 1 && !maze[playerX][playerY].right_w)
-        {
-            playerX++;
-        }
-        else
-        {
-            mvprintw(2 * height + 1, 4 * width + 1, "Invalid Move");
-            // refresh();
-            break;
-        }
-        break;
-    case 98: // 'b' for bomb
+    init_pair(3, COLOR_WHITE, COLOR_WHITE);
+    bkgd(COLOR_PAIR(3));
+    attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
+    
+    init_pair(2, COLOR_GREEN, COLOR_GREEN);
+   
+    mvprintw(2 * end_y + 1, 4 * end_x + 1, "📍");
 
-        time_t start_time = time(nullptr);
-        time_t current_time;
-        int ch;
-        double elapsed;
-
-        while (bomb != 0)
-        {
-            current_time = time(nullptr);
-            elapsed = difftime(current_time, start_time);
-            mvprintw(2 * height + 1, 0, "You got a bomb, press arrow key to choose wall to destroy");
-            refresh();
-
-            if (elapsed > 2.5)
-            { // 如果超过2秒，退出循环
-                break;
+    mvprintw(2*height+2, 0, "Time remaining: %.0f seconds", elapsed);
+    mvprintw(2 * player_y + 1, 4 * player_x + 1, "👤");
+    
+    
+    mvprintw(0, 4 * width + 3, "Bomb: %d", bomb);
+    // The corner and edges need to be handled for the entire grid
+    for (int j = 0; j < height; j++) {
+        for (int i = 0; i < width; i++) {
+            if (maze[i][j].revealed==true){
+                int x = 4 * i;
+                int y = 2 * j;
+                // Display the walls of the cell
+                mvaddch(y, x, '+'); // Corner of the cell
+                if (maze[i][j].top_w || j == 0) {
+                    mvaddch(y, x + 1, '-'); // Top wall
+                    mvaddch(y, x + 2, '-');
+                    mvaddch(y, x + 3, '-');
+                }
+                if (maze[i][j].left_w || i == 0) {
+                    mvaddch(y + 1, x, '|'); // Left wall
+                }
+                if (maze[i][j].right_w || i == width - 1) {
+                    mvaddch(y + 1, x + 4, '|'); // Right wall
+                }
+                if (maze[i][j].down_w || j == height - 1) {
+                    mvaddch(y + 2, x, '+'); // Bottom corner
+                    mvaddch(y + 2, x + 1, '-'); // Bottom wall
+                    mvaddch(y + 2, x + 2, '-');
+                    mvaddch(y + 2, x + 3, '-');
+                }
             }
-
-            ch = getch(); // 获取键盘输入
-            switch (ch)
-            {
-            case ERR: // 如果没有输入，继续循环
-                continue;
-            case KEY_UP:
-                if (playerY > 0 && maze[playerX][playerY].top_w)
-                {
-                    bomb--;
-                    maze[playerX][playerY].top_w = false;
-                    maze[playerX][playerY - 1].down_w = false;
-                }
-                break;
-            case KEY_LEFT:
-                if (playerX > 0 && maze[playerX][playerY].left_w)
-                {
-                    bomb--;
-                    maze[playerX][playerY].left_w = false;
-                    maze[playerX - 1][playerY].right_w = false;
-                }
-                break;
-            case KEY_DOWN:
-                if (playerY < height - 1 && maze[playerX][playerY].down_w)
-                {
-                    bomb--;
-                    maze[playerX][playerY].down_w = false;
-                    maze[playerX][playerY + 1].top_w = false;
-                }
-                break;
-            case KEY_RIGHT:
-                if (playerX < width - 1 && maze[playerX][playerY].right_w)
-                {
-                    bomb--;
-                    maze[playerX][playerY].right_w = false;
-                    maze[playerX + 1][playerY].left_w = false;
-                }
-                break;
-            }
-            break; // 一旦接收到有效输入即退出循环
         }
     }
-    attroff(COLOR_PAIR(1)); // 关闭颜色属性
-    refresh();              // Refresh the screen to show the changes
-}
 
+    // Correctly handling the last row and the last column
+    // Add corners and vertical lines on the right edge of the maze
+    for (int j = 0; j <= height; j++) {
+        mvaddch(2 * j, 4 * width, '+'); // Add corners
+        if (j < height) {
+            mvaddch(2 * j + 1, 4 * width, '|'); // Add vertical lines
+        }
+    }
+    
+    for (int j = 0; j <= height; j++) {
+        mvaddch(2 * j, 0, '+'); // Add corners
+        if (j < height) {
+            mvaddch(2 * j + 1, 0, '|'); // Add vertical lines
+        }
+    }
+    // Add corners and horizontal lines on the bottom edge of the maze
+    for (int i = 0; i <= width; i++) {
+        mvaddch(2 * height, 4 * i, '+'); // Add corners
+        if (i < width) {
+            mvaddch(2 * height, 4 * i + 1, '-'); // Add horizontal lines
+            mvaddch(2 * height, 4 * i + 2, '-');
+            mvaddch(2 * height, 4 * i + 3, '-');
+        }
+    }
+    
+    for (int i = 0; i <= width; i++) {
+        mvaddch(0, 4 * i, '+'); // Add corners
+        if (i < width) {
+            mvaddch(0, 4 * i + 1, '-'); // Add horizontal lines
+            mvaddch(0, 4 * i + 2, '-');
+            mvaddch(0, 4 * i + 3, '-');
+        }
+    }
+    
+    attroff(COLOR_PAIR(1)); // 关闭颜色属性
+    refresh();
+}
