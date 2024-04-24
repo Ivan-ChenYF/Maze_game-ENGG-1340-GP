@@ -98,8 +98,8 @@ int choiceUI(OptionType optionType, string username) {
 }
 
 
-void customize(int &width, int &height, int &start_x, int &start_y) {
-    // 初始化 ncurses
+void customize(int &width, int &height, int &timelimit, int &bomb, string username) {
+    // 初始化ncurses
     initscr();
     cbreak();
     noecho();
@@ -114,28 +114,29 @@ void customize(int &width, int &height, int &start_x, int &start_y) {
     int startY = maxRows / 2 - 2;
 
     // 定义输入框的名称
-    std::string names[4] = {" · Width(5-30)", " · Height(5-30)", " · Start Point(x)", " · Start Point(y)"};
+    string names[4] = {"Width(5-30)", "Height(5-30)", "Time Limit(>0)", "Number of Bomb(>=0)"};
 
     // 初始化输入框的值
-    int values[4] = {15, 15, 0, 0};
+    string values[4];
 
     // 当前选中的输入框索引
     int currentField = 0;
+    bool invalid = false;
 
     while (true) {
         clear();
         PrintFromFile("ASCII - Main_Menu.txt");
+        mvprintw(9, 0, (" Hi, " + username + ".").c_str());
+        if (invalid)
+            mvprintw(16, 2, "**Invalid Input!");
 
-        // 打印界面标题
-        mvprintw(9, 0, "Press left or right key to decrease or increase value");
-
-        // 打印输入框
+        // 打印输入框和值
         for (int i = 0; i < 4; i++) {
             if (i == currentField) {
                 attron(A_REVERSE);  // 高亮当前选中的输入框
             }
 
-            mvprintw(11 + i, 0, "%s: %d", names[i].c_str(), values[i]);
+            mvprintw(11 + i, 2, "· %s: %s", names[i].c_str(), values[i].c_str());
 
             if (i == currentField) {
                 attroff(A_REVERSE);
@@ -149,51 +150,59 @@ void customize(int &width, int &height, int &start_x, int &start_y) {
         int key = getch();
 
         // 处理用户输入
-        switch (key) {
-            case KEY_UP:
+        if (key == KEY_UP) {
+            if (invalid == false)
                 currentField = (currentField - 1 + 4) % 4;  // 上移当前选中的输入框
-                break;
-            case KEY_DOWN:
+        } else if (key == KEY_DOWN) {
+            if (invalid == false )
                 currentField = (currentField + 1) % 4;  // 下移当前选中的输入框
-                break;
-            case KEY_LEFT:
-                if (currentField == 0 || currentField == 1) {
-                    values[currentField] -= 2;  // 减少第一个和第二个输入框的值
-                    if (values[currentField] < 5) {
-                        values[currentField] = 5;  // 保证值不小于5
-                    }
-                } else {
-                    values[currentField]--;  // 减少第三个和第四个输入框的值
-                    if (values[currentField] < 0 || values[currentField] >= values[currentField - 2]) {
-                        values[currentField] = 0;  // 保证值不小于0且不大于第一个或第二个值
-                    }
-                }
-                break;
-            case KEY_RIGHT:
-                if (currentField == 0 || currentField == 1) {
-                    values[currentField] += 2;  // 增加第一个和第二个输入框的值
-                    if (values[currentField] > 30) {
-                        values[currentField] = 30;  // 保证值不大于30
-                    }
-                } else {
-                    values[currentField]++;  // 增加第三个和第四个输入框的值
-                    if (values[currentField] >= values[currentField - 2] || values[currentField] < 0) {
-                        values[currentField] = values[currentField - 2] -1;  // 保证值不大于第一个或第二个值且不小于0
-                    }
-                }
-                break;
-            case '\n':
-                if (currentField == 3) {
-                    width = values[0];
-                    height = values[1];
-                    start_x = values[2];
-                    start_y = values[3];
-                    return;
-                }
-                currentField++;
-                break;
-            default:
-                break;
+        } else if (key == '\n') {
+            bool allFilled = true; // CHECK IF EMPTY
+            for (const auto& value : values)
+                if (value.empty()) 
+                    allFilled = false;
+            invalid = false;
+            if (values[currentField].empty()){
+                currentField = (currentField + 1) % 4;
+                continue;
+            }
+            int value = stoi(values[currentField]); // CHECK VALID INPUT
+            if ((currentField == 0 || currentField == 1) && (value < 5 || value > 30))
+                invalid = true;
+            else if ((currentField == 2) && (value <= 0))
+                invalid = true;
+            else if ((currentField == 3) && (value < 0))
+                invalid = true;
+            else if (allFilled) {
+                width = stoi(values[0]);
+                height = stoi(values[1]);
+                timelimit = stoi(values[2]);
+                bomb = stoi(values[3]);
+                return;
+            }
+            else{
+                currentField = (currentField + 1) % 4;
+            }
+        } else if (key == KEY_BACKSPACE || key == 127) {
+            // 处理退格键
+            if (!values[currentField].empty()) {
+                values[currentField].pop_back();  // 删除输入框中的最后一个字符
+            }
+        } else {
+            // 处理数值输入
+            values[currentField] += key;  // 将输入字符添加到当前选中的输入框中
+            invalid = false;
+            if (key < '0' || key > '9'){
+                invalid = true;
+                continue;
+            }
+            int value = stoi(values[currentField]); // CHECK VALID INPUT
+            if ((currentField == 0 || currentField == 1) && (value < 5 || value > 30))
+                invalid = true;
+            else if ((currentField == 2) && (value <= 0))
+                invalid = true;
+            else if ((currentField == 3) && (value < 0))
+                invalid = true;
         }
     }
 
