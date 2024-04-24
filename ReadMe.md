@@ -43,8 +43,8 @@ Here is an overview of the key files and their functions in the project:
 - `ASCII - End.txt`: ASCII art for the end-of-game screen.
 
 **coding requirements**
-Generation of random game sets or events
-✅ Data structures for storing game status (e.g., arrays, STL containers)
+- ✅ Generation of random game sets or events
+- ✅ Data structures for storing game status (e.g., arrays, STL containers)
 ✅ Dynamic memory management (e.g., dynamic arrays, linked lists, STL containers)
 ✅ File input/output (e.g., for loading/saving game status)
 ✅ Program codes in multiple files (recall separate compilation)
