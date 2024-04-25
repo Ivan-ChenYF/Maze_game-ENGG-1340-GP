@@ -99,43 +99,47 @@ int main(){
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
     
+    // LOADING PAGE
     setlocale(LC_ALL, "");
+    initscr();
+    PrintFromFile("ASCII - Enigma_Maze.txt");
+    getch();
+    clear();
+    refresh();
     
-    bool gamestate=true;
-    while (gamestate){
-        // LOADING PAGE
-        setlocale(LC_ALL, "");
-        initscr();
-        PrintFromFile("ASCII - Enigma_Maze.txt");
-        getch();
-        clear();
-        refresh();
-        
-        // INPUT USERNAME
-        
-        PrintFromFile("ASCII - Create_User.txt");
-        while ((ch = getch()) != '\n') {
-            if (ch == KEY_BACKSPACE || ch == 127) {
-                if (!game.player_name.empty()) {
-                    game.player_name.pop_back();
-                    refresh();
-                }
-            } else {
-                game.player_name.push_back(ch);
+    // INPUT USERNAME
+    
+    PrintFromFile("ASCII - Create_User.txt");
+    while ((ch = getch()) != '\n') {
+        if (ch == KEY_BACKSPACE || ch == 127) {
+            if (!game.player_name.empty()) {
+                game.player_name.pop_back();
                 refresh();
             }
-            clear();
-            PrintFromFile("ASCII - Create_User.txt");
-            printw(game.player_name.c_str());
+        } else {
+            game.player_name.push_back(ch);
+            refresh();
         }
         clear();
-        refresh();
+        PrintFromFile("ASCII - Create_User.txt");
+        printw(game.player_name.c_str());
+    }
+    clear();
+    refresh();
+    
+    cout << "Your user name is " << game.player_name << endl;
+    bool gamestate=true;
+    while (gamestate){
         
-        cout << "Your user name is " << game.player_name << endl;
+
         
         int mode = choiceUI(MODE, game.player_name);
-        if (mode == 2){
+        if (mode == 3){
             
+            PrintFromFile("ASCII - End.txt");
+            usleep(2000000);
+            endwin();
+            break;
         }
         int difficulty = choiceUI(DIFFICULTY, game.player_name);
         cout << "Your mode is " << mode << endl;
@@ -220,3 +224,4 @@ int main(){
 
     return 0;
 }
+
