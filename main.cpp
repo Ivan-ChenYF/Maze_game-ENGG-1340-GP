@@ -89,127 +89,134 @@ void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y
 int main(){
     int bomb=0;
     int timelimit;
-    GameState game; // Initialize gameState
-    vector<double> time_rank; // Initialize ranking
-    
-    setlocale(LC_ALL, "");
-    
-    // LOADING PAGE
-    initscr();
-    PrintFromFile("ASCII - Enigma_Maze.txt");
-    getch();
-    clear();
-    refresh();
-
-    // INPUT USERNAME
     int ch;
-    PrintFromFile("ASCII - Create_User.txt");
-    while ((ch = getch()) != '\n') {
-        if (ch == KEY_BACKSPACE || ch == 127) {
-            if (!game.player_name.empty()) {
-                game.player_name.pop_back();
-                refresh();
-            }
-        } else {
-            game.player_name.push_back(ch);
-            refresh();
-        }
-        clear();
-        PrintFromFile("ASCII - Create_User.txt");
-        printw(game.player_name.c_str());
-    }
-    clear();
-    refresh();
-
-    cout << "Your user name is " << game.player_name << endl;
-
-    int mode = choiceUI(MODE, game.player_name);
-    if (mode == 2){
-        
-    }
-    int difficulty = choiceUI(DIFFICULTY, game.player_name);
-    cout << "Your mode is " << mode << endl;
-    
     // Initialize maze parameters
     int width;
     int height;
     int start_x,start_y;
     int end_x,end_y;
-    difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb, game.player_name);
-    time_t start_time = time(nullptr);
-    time_t current_time;
     
-    cell** maze = new cell*[width]; //使用动态数组创建maze
-    for (int i = 0; i < width; ++i) {
-        maze[i] = new cell [height];
-    }
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            init(&maze[i][j],i,j);
-        }
-    }
-    initscr();          // Start ncurses mode
-    cbreak();           // Disable line buffering
-    noecho();           // Don't echo user input
-    keypad(stdscr, TRUE); // Enable function keys
-    curs_set(0);        // Hide the cursor
-    timeout(100);     //100毫秒没有接收到新的输入返回ERR
+    GameState game; // Initialize gameState
+    vector<double> time_rank; // Initialize ranking
     
+    setlocale(LC_ALL, "");
     
-    generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
-
-
-    
-
-
-    int player_x = start_x;
-    int player_y = start_y;
-    double elapsed;
-
-    while ((ch = getch()) != 'q') {
+    bool gamestate=true;
+    while (gamestate){
+        // LOADING PAGE
+        setlocale(LC_ALL, "");
+        initscr();
+        PrintFromFile("ASCII - Enigma_Maze.txt");
+        getch();
+        clear();
+        refresh();
         
-
-        current_time = time(nullptr);
-        elapsed= difftime(current_time, start_time);
-
-        if (elapsed>timelimit){
-            init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
-            attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
-            usleep(100000);
+        // INPUT USERNAME
+        
+        PrintFromFile("ASCII - Create_User.txt");
+        while ((ch = getch()) != '\n') {
+            if (ch == KEY_BACKSPACE || ch == 127) {
+                if (!game.player_name.empty()) {
+                    game.player_name.pop_back();
+                    refresh();
+                }
+            } else {
+                game.player_name.push_back(ch);
+                refresh();
+            }
             clear();
-            PrintFromFile("ASCII - Try_Again.txt");
-            usleep(2000000);
-            attroff(COLOR_PAIR(1));
-            break;
+            PrintFromFile("ASCII - Create_User.txt");
+            printw(game.player_name.c_str());
         }
-        if (player_x==end_x&&player_y==end_y){
-            init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
-            attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
-            usleep(100000);
-            clear();
-            PrintFromFile("ASCII - Well_Done.txt");
-            usleep(2000000);
-            attroff(COLOR_PAIR(1));
-            break;
-        }
-        if (mode==0){
-            classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y,timelimit,bomb);
-        }
-        else{
-            fog_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y, timelimit,bomb);
-        }
-        if (ch == ERR) continue;
+        clear();
+        refresh();
         
-        player_movement(maze,width,height,player_x,player_y,ch,bomb);
+        cout << "Your user name is " << game.player_name << endl;
         
+        int mode = choiceUI(MODE, game.player_name);
+        if (mode == 2){
+            
+        }
+        int difficulty = choiceUI(DIFFICULTY, game.player_name);
+        cout << "Your mode is " << mode << endl;
+        
+        
+        difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb, game.player_name);
+        time_t start_time = time(nullptr);
+        time_t current_time;
+        
+        cell** maze = new cell*[width]; //使用动态数组创建maze
+        for (int i = 0; i < width; ++i) {
+            maze[i] = new cell [height];
+        }
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                init(&maze[i][j],i,j);
+            }
+        }
+        initscr();          // Start ncurses mode
+        cbreak();           // Disable line buffering
+        noecho();           // Don't echo user input
+        keypad(stdscr, TRUE); // Enable function keys
+        curs_set(0);        // Hide the cursor
+        timeout(100);     //100毫秒没有接收到新的输入返回ERR
+        
+        
+        generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
+        
+        
+        
+        
+        
+        int player_x = start_x;
+        int player_y = start_y;
+        double elapsed;
+        
+        while ((ch = getch()) != 'q') {
+            
+            
+            current_time = time(nullptr);
+            elapsed= difftime(current_time, start_time);
+            
+            if (elapsed>timelimit){
+                init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
+                attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
+                usleep(100000);
+                clear();
+                PrintFromFile("ASCII - Try_Again.txt");
+                usleep(2000000);
+                attroff(COLOR_PAIR(1));
+                break;
+            }
+            if (player_x==end_x&&player_y==end_y){
+                init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
+                attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
+                usleep(100000);
+                clear();
+                PrintFromFile("ASCII - Well_Done.txt");
+                usleep(2000000);
+                attroff(COLOR_PAIR(1));
+                
+                break;
+            }
+            if (mode==0){
+                classic_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y,timelimit,bomb);
+            }
+            else{
+                fog_mode(maze,width, height, player_x,player_y, start_time, elapsed, end_x, end_y, timelimit,bomb);
+            }
+            if (ch == ERR) continue;
+            
+            player_movement(maze,width,height,player_x,player_y,ch,bomb);
+            
+        }
+        for (int i = 0; i < width; i++) {
+            delete[] maze[i];
+        }
+        delete[] maze;
+        endwin();
     }
-
-    endwin();
-
     // Clean up
-    for (int i = 0; i < width; i++) {
-        delete[] maze[i];
-    }
-    delete[] maze;
+
     return 0;
 }
