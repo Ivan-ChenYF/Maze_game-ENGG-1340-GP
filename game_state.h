@@ -12,6 +12,7 @@ struct Item {
     string name;
     int quantity;
 };
+using Inventory = vector<Item>;
 
 struct GameState {
     cell** maze;
@@ -21,12 +22,14 @@ struct GameState {
     int end_x, end_y;
     int mode, difficulty;
     int bomb;
+    Inventory inventory;
     double elapsed;
 };
 
 void initializeNewGame(GameState& gameState);
 void updateRank(vector<double>& rank, double time);
-void saveGame(GameState& gameState);
+void saveGame(const GameState& gameState);
 void loadGame(GameState& gameState);
 
 #endif
+
