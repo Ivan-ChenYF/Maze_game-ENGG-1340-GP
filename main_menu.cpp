@@ -6,6 +6,8 @@
 using namespace std;
 
 int choiceUI(OptionType optionType, string username) {
+    
+    
     const Option modeOptions[] = {
         {"Classic Mode", 0},
         {"Fog Mode", 1},
@@ -85,7 +87,7 @@ int choiceUI(OptionType optionType, string username) {
                 usleep(700000);
                 mvprintw(maxRows/2, maxCols/2 - strlen("Loading...")/2, "Loading...");
                 refresh();
-                usleep(1900000);
+                usleep(100000);
                 clear();
                 refresh();
                 return options[currentOption].value;
