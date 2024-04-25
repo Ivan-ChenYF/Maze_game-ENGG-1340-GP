@@ -21,6 +21,7 @@ struct GameState {
     int player_x, player_y;
     int mode, difficulty;
     Inventory inventory;
+    double elapsed;
 };
 
 void initializeNewGame(GameState& gameState);
