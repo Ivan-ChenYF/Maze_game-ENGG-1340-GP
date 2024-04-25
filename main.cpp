@@ -215,13 +215,13 @@ int main(){
             
         }
         // Get gameState
-        gameState.mode = mode;
-        gameState.difficulty = difficulty;
-        gameState.maze = maze;
-        gameState.width = width;
-        gameState.height = height;
-        gameState.player_x = player_x;
-        gameState.player_y = player_y;
+        gamestate.mode = mode;
+        gamestate.difficulty = difficulty;
+        gamestate.maze = maze;
+        gamestate.width = width;
+        gamestate.height = height;
+        gamestate.player_x = player_x;
+        gamestate.player_y = player_y;
         saveGame(gamestate);
         time_rank.push_back(elapsed);
         for (int i = 0; i < width; i++) {
