@@ -8,18 +8,9 @@
 #include <unistd.h>
 using namespace std;
 
-cell** init_game(int width,int height,int start_x,int start_y,int end_x,int end_y){
-    cell** maze = new cell*[width]; //使用动态数组创建maze
-    for (int i = 0; i < width; ++i) {
-        maze[i] = new cell [height];
-    }
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            init(&maze[i][j],i,j);
-        }
-    }
-    generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
-    return maze;
+void init_game(cell** &maze,int width,int height,int start_x,int start_y,int &end_x,int &end_y){
+
+    
 }
 
 void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y,int timelimit,int bomb){
@@ -87,16 +78,7 @@ void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y
     else if (mode==3){
         customize(width, height, timelimit, bomb, username);
     }
-    else{
-        cout<<"Width: ";
-        cin>>width;
-        cout<<"Height: ";
-        cin>>height;
-        cout<<"start_x: ";
-        cin>>start_x;
-        cout<<"start_y: ";
-        cin>>start_y;
-    }
+
     srand(time(nullptr));
     start_x=rand()%width;
     start_y=rand()%height;
@@ -112,10 +94,9 @@ int main(){
     int end_x,end_y;
     int difficulty;
     int mode;
-    int player_x = start_x;
-    int player_y = start_y;
-    double elapsed;
     cell** maze=nullptr;
+    double elapsed;
+    int player_x,player_y;
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
     
@@ -154,23 +135,39 @@ int main(){
         if (mode==0||mode==1){
             difficulty = choiceUI(DIFFICULTY, game.player_name);
             difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb, game.player_name);
-            maze=init_game( width, height, start_x, start_y, end_x, end_y);
-            
+            maze = new cell*[width]; //使用动态数组创建maze
+            for (int i = 0; i < width; ++i) {
+                maze[i] = new cell [height];
+            }
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    init(&maze[i][j],i,j);
+                }
+            }
+            generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
+
         }
         else if (mode ==2){
-            loadGame(game);
+            loadGame(game);  // 确保 game 是一个 GameState 类型的实例
 
-            maze=game.maze;
-            
-            mode=game.mode;
-            difficulty=game.difficulty;
-            width=game.width;
-            height=game.height;
-            player_x=game.player_x;
-            player_y=game.player_y;
-            end_x=game.end_x;
-            end_y=game.end_y;
-            bomb=game.bomb;
+            // After loading, we might need to setup the maze structure
+            maze = new cell*[game.width];  // 动态分配空间
+            for (int i = 0; i < game.width; ++i) {
+                maze[i] = new cell[game.height];
+            }
+
+            // Initialize the maze cells with the loaded data
+            for (int i = 0; i < game.width; ++i) {
+                for (int j = 0; j < game.height; ++j) {
+                    init(&maze[i][j], i, j);  // Assuming init() can set up each cell
+                    // Alternatively, directly copy the data if available
+                    maze[i][j].top_w = game.maze[i][j].top_w;  // Assuming deep copy is possible or necessary
+                    maze[i][j].right_w = game.maze[i][j].right_w;
+                    maze[i][j].left_w = game.maze[i][j].left_w;
+                    maze[i][j].down_w = game.maze[i][j].down_w;
+                    maze[i][j].revealed = game.maze[i][j].revealed;
+                }
+            }
             
         }
     
@@ -187,6 +184,7 @@ int main(){
         
         time_t start_time = time(nullptr);
         time_t current_time;
+
         
 
         
@@ -202,7 +200,8 @@ int main(){
         
         
         
-        
+        player_x = start_x;
+        player_y = start_y;
         
         
 
@@ -257,7 +256,6 @@ int main(){
         game.end_y = end_y;
         game.bomb=bomb;
         saveGame(game);
-        time_rank.push_back(elapsed);
 
         endwin();
     }
@@ -265,3 +263,4 @@ int main(){
 
     return 0;
 }
+
