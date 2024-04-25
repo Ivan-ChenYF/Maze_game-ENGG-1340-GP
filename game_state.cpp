@@ -10,18 +10,7 @@ void updateRank(vector<int>& rank, int time) {
     sort(rank.begin(), rank.end());
 }
 
-void updateInventory(vector<Item>& inventory, Item item) {
-    // Add item to inventory
-    inventory.push_back(item);
-}
 
-void initializeNewGame(GameState& gameState) {
-    // Reset player's name
-    gameState.player_name = "";
-
-    // Initialize inventory
-    gameState.inventory.clear();
-}
 
 void saveGame(const GameState& gameState) {
     // Get filename
@@ -60,14 +49,6 @@ void saveGame(const GameState& gameState) {
         }
     }
 
-    // Write inventory
-    int inventory_size = gameState.inventory.size();
-    fout << inventory_size << endl;
-    
-    for (int i = 0; i < inventory_size; i++) {
-        fout << gameState.inventory[i].name << " "
-             << gameState.inventory[i].quantity << endl;
-    }
     
     fout.close();
 }
@@ -114,14 +95,6 @@ void loadGame(GameState& gameState) {
         }
     }
 
-    // Read inventory
-    int inventory_size;
-    fin >> inventory_size;
-    
-    for (int i = 0; i < inventory_size; i++) {
-        fin >> gameState.inventory[i].name
-        >> gameState.inventory[i].quantity;
-    }
 
     fin.close();
 }
