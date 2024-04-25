@@ -40,7 +40,9 @@ Here is an overview of the key files and their functions in the project:
 - `ASCII - Create_User.txt`: ASCII art for the user creation screen.
 - `ASCII - Main_Menu.txt`: ASCII art for the main menu.
 - `ASCII - Enigma_Maze.txt`: ASCII art for the game title screen.
-- `ASCII - End.txt`: ASCII art for the end-of-game screen.
+- `ASCII - Try_Again.txt`: ASCII art for the end-of-game screen(lose).
+- `ASCII - Well_Done.txt`: ASCII art for the end-of-game screen(win).
+- `ASCII - End.txt`: ASCII art for the end-of-game screen(quit).
 
 **coding requirements**
 - ✅ Generation of random game sets or events
