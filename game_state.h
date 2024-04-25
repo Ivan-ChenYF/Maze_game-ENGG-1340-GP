@@ -19,6 +19,7 @@ struct GameState {
     string player_name;
     int width, height;
     int player_x, player_y;
+    int mode, difficulty;
     Inventory inventory;
 };
 
