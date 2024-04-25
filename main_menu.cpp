@@ -108,6 +108,7 @@ void customize(int &width, int &height, int &timelimit, int &bomb, string userna
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    timeout(-1);
 
     // NAME OF INPUT BOX
     string names[4] = {"Width(5-30)", "Height(5-30)", "Time Limit(>0)", "Number of Bomb(>=0)"};
