@@ -37,6 +37,7 @@ int choiceUI(OptionType optionType, string username) {
 
     // INITIALIZE NCURSES
     initscr();
+    flushinp();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
@@ -103,6 +104,7 @@ void customize(int &width, int &height, int &timelimit, int &bomb, string userna
     
     // INITIALIZE NCURSES
     initscr();
+    flushinp();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
