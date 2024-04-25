@@ -1,4 +1,5 @@
 #include "game_state.h"
+#include "random_maze.h"
 #include <iostream>
 using namespace std;
 
@@ -10,9 +11,20 @@ void updateRank(vector<int>& rank, int time) {
     sort(rank.begin(), rank.end());
 }
 
+void updateInventory(vector<Item>& inventory, Item item) {
+    // Add item to inventory
+    inventory.push_back(item);
+}
 
+void initializeNewGame(GameState& gameState) {
+    // Reset player's name
+    gameState.player_name = "";
 
-void saveGame(GameState& gameState) {
+    // Initialize inventory
+    gameState.inventory.clear();
+}
+
+void saveGame(const GameState& gameState) {
     // Get filename
     string filename = "save_file.txt";
     ofstream fout(filename);
@@ -49,6 +61,14 @@ void saveGame(GameState& gameState) {
         }
     }
 
+    // Write inventory
+    int inventory_size = gameState.inventory.size();
+    fout << inventory_size << endl;
+    
+    for (int i = 0; i < inventory_size; i++) {
+        fout << gameState.inventory[i].name << " "
+             << gameState.inventory[i].quantity << endl;
+    }
     
     fout.close();
 }
@@ -83,7 +103,12 @@ void loadGame(GameState& gameState) {
     for (int i = 0; i < gameState.width; ++i) {
         gameState.maze[i] = new cell[gameState.height];
     }
-
+    for (int i = 0; i < gameState.width; i++) {
+        for (int j = 0; j < gameState.height; j++) {
+            init(&gameState.maze[i][j],i,j);
+        }
+    }
+    
     // Read maze
     for (int i = 0; i < gameState.width; ++i) {
         for (int j = 0; j < gameState.height; ++j) {
@@ -95,6 +120,14 @@ void loadGame(GameState& gameState) {
         }
     }
 
+    // Read inventory
+    int inventory_size;
+    fin >> inventory_size;
+    
+    for (int i = 0; i < inventory_size; i++) {
+        fin >> gameState.inventory[i].name
+        >> gameState.inventory[i].quantity;
+    }
 
     fin.close();
 }
