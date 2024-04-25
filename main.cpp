@@ -214,6 +214,14 @@ int main(){
             player_movement(maze,width,height,player_x,player_y,ch,bomb);
             
         }
+        // Get gameState
+        gameState.mode = mode;
+        gameState.difficulty = difficulty;
+        gameState.maze = maze;
+        gameState.width = width;
+        gameState.height = height;
+        gameState.player_x = player_x;
+        gameState.player_y = player_y;
         saveGame(gamestate);
         time_rank.push_back(elapsed);
         for (int i = 0; i < width; i++) {
