@@ -12,7 +12,7 @@ void updateRank(vector<int>& rank, int time) {
 
 
 
-void saveGame(const GameState& gameState) {
+void saveGame(GameState& gameState) {
     // Get filename
     string filename = "save_file.txt";
     ofstream fout(filename);
