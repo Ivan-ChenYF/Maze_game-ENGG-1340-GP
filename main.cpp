@@ -214,6 +214,8 @@ int main(){
             player_movement(maze,width,height,player_x,player_y,ch,bomb);
             
         }
+        saveGame(gamestate);
+        time_rank.push_back(elapsed);
         for (int i = 0; i < width; i++) {
             delete[] maze[i];
         }
