@@ -25,18 +25,23 @@ void initializeNewGame(GameState& gameState) {
 
 void saveGame(const GameState& gameState) {
     // Get filename
-    string filename = "save_file";
-    cout << "File name (end with .txt): " << endl;
+    string filename = "save_file.txt";
     ofstream fout(filename);
 
     // Write player name
     fout << gameState.player_name << endl;
+
+    // Write gamemode and difficulty
+    fout << gameState.mode << " " << gameState.difficulty << endl;
     
     // Write player position
     fout << gameState.player_x << " " << gameState.player_y << endl;
 
     // Write maze dimensions
     fout << gameState.width << " " << gameState.height << endl;
+
+    // Write time left
+    fout << gameState.elapsed << endl;
 
     // Write maze
     for (int i = 0; i < gameState.width; ++i) {
@@ -62,49 +67,49 @@ void saveGame(const GameState& gameState) {
 }
 
 void loadGame(GameState& gameState) {
-    string filename;
-    cout << "File name (end with .txt): " << endl;
-    cin >> filename;
+    string filename = "save_file.txt";
     ifstream fin(filename);
 
-    if (fin) {
-        // Read player name
-        fin >> gameState.player_name;
-    
-        // Read player position
-        fin >> gameState.player_x >> gameState.player_y;
-    
-        // Read maze dimensions
-        fin >> gameState.width >> gameState.height;
-    
-        // Allocate memory for maze
-        gameState.maze = new cell*[gameState.width];
-        for (int i = 0; i < gameState.width; ++i) {
-            gameState.maze[i] = new cell[gameState.height];
-        }
-    
-        // Read maze
-        for (int i = 0; i < gameState.width; ++i) {
-            for (int j = 0; j < gameState.height; ++j) {
-                fin >> gameState.maze[i][j].top_w
-                    >> gameState.maze[i][j].right_w
-                    >> gameState.maze[i][j].left_w
-                    >> gameState.maze[i][j].down_w
-                    >> gameState.maze[i][j].revealed;
-            }
-        }
-    
-        // Read inventory
-        int inventory_size;
-        fin >> inventory_size;
-        
-        for (int i = 0; i < inventory_size; i++) {
-            fin >> gameState.inventory[i].name
-            >> gameState.inventory[i].quantity;
+    // Read player name
+    fin >> gameState.player_name;
+
+    // Read gamemode and difficulty
+    fin >> gameState.mode >> gameState.difficulty;
+
+    // Read player position
+    fin >> gameState.player_x >> gameState.player_y;
+
+    // Read maze dimensions
+    fin >> gameState.width >> gameState.height;
+
+    // Read time left
+    fin >> gameState.elapsed;
+
+    // Allocate memory for maze
+    gameState.maze = new cell*[gameState.width];
+    for (int i = 0; i < gameState.width; ++i) {
+        gameState.maze[i] = new cell[gameState.height];
+    }
+
+    // Read maze
+    for (int i = 0; i < gameState.width; ++i) {
+        for (int j = 0; j < gameState.height; ++j) {
+            fin >> gameState.maze[i][j].top_w
+                >> gameState.maze[i][j].right_w
+                >> gameState.maze[i][j].left_w
+                >> gameState.maze[i][j].down_w
+                >> gameState.maze[i][j].revealed;
         }
     }
-    else {
-        cout << "File not found" << endl;
+
+    // Read inventory
+    int inventory_size;
+    fin >> inventory_size;
+    
+    for (int i = 0; i < inventory_size; i++) {
+        fin >> gameState.inventory[i].name
+        >> gameState.inventory[i].quantity;
     }
+
     fin.close();
 }
