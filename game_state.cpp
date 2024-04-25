@@ -37,11 +37,17 @@ void saveGame(const GameState& gameState) {
     // Write player position
     fout << gameState.player_x << " " << gameState.player_y << endl;
 
+    // Write exit location
+    fout << gameState.end_x << " " << gameState.end_y << endl;
+
     // Write maze dimensions
     fout << gameState.width << " " << gameState.height << endl;
 
     // Write time left
     fout << gameState.elapsed << endl;
+
+    // Write bombs left
+    fout << gameState.bomb << endl;
 
     // Write maze
     for (int i = 0; i < gameState.width; ++i) {
@@ -79,11 +85,17 @@ void loadGame(GameState& gameState) {
     // Read player position
     fin >> gameState.player_x >> gameState.player_y;
 
+    // Read exit location
+    fin >> gameState.end_x >> gameState.end_y;
+
     // Read maze dimensions
     fin >> gameState.width >> gameState.height;
 
     // Read time left
     fin >> gameState.elapsed;
+
+    // Read bombs left
+    fin >> gameState.bomb;
 
     // Allocate memory for maze
     gameState.maze = new cell*[gameState.width];
