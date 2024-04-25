@@ -7,6 +7,21 @@
 #include <string>
 #include <unistd.h>
 using namespace std;
+
+cell** init_game(int width,int height,int start_x,int start_y,int end_x,int end_y){
+    cell** maze = new cell*[width]; //使用动态数组创建maze
+    for (int i = 0; i < width; ++i) {
+        maze[i] = new cell [height];
+    }
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            init(&maze[i][j],i,j);
+        }
+    }
+    generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
+    return maze;
+}
+
 void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y,int timelimit,int bomb){
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
@@ -95,7 +110,12 @@ int main(){
     int height;
     int start_x,start_y;
     int end_x,end_y;
-    
+    int difficulty;
+    int mode;
+    int player_x = start_x;
+    int player_y = start_y;
+    double elapsed;
+    cell** maze=nullptr;
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
     
@@ -130,34 +150,47 @@ int main(){
     cout << "Your user name is " << game.player_name << endl;
     bool gamestate=true;
     while (gamestate){
-        
-
-        
-        int mode = choiceUI(MODE, game.player_name);
-        if (mode == 3){
+        mode = choiceUI(MODE, game.player_name);
+        if (mode==0||mode==1){
+            difficulty = choiceUI(DIFFICULTY, game.player_name);
+            difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb, game.player_name);
+            maze=init_game( width, height, start_x, start_y, end_x, end_y);
             
+        }
+        else if (mode ==2){
+            loadGame(game);
+
+            maze=game.maze;
+            
+            mode=game.mode;
+            difficulty=game.difficulty;
+            width=game.width;
+            height=game.height;
+            player_x=game.player_x;
+            player_y=game.player_y;
+            end_x=game.end_x;
+            end_y=game.end_y;
+            bomb=game.bomb;
+            
+        }
+    
+        else if (mode == 3){
             PrintFromFile("ASCII - End.txt");
             usleep(2000000);
             endwin();
             break;
         }
-        int difficulty = choiceUI(DIFFICULTY, game.player_name);
-        cout << "Your mode is " << mode << endl;
+
+
+
         
         
-        difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb, game.player_name);
         time_t start_time = time(nullptr);
         time_t current_time;
         
-        cell** maze = new cell*[width]; //使用动态数组创建maze
-        for (int i = 0; i < width; ++i) {
-            maze[i] = new cell [height];
-        }
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                init(&maze[i][j],i,j);
-            }
-        }
+
+        
+        
         initscr();          // Start ncurses mode
         cbreak();           // Disable line buffering
         noecho();           // Don't echo user input
@@ -166,15 +199,13 @@ int main(){
         timeout(100);     //100毫秒没有接收到新的输入返回ERR
         
         
-        generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
         
         
         
         
         
-        int player_x = start_x;
-        int player_y = start_y;
-        double elapsed;
+        
+
         
         while ((ch = getch()) != 'q') {
             
@@ -215,23 +246,22 @@ int main(){
             
         }
         // Get gameState
-        gamestate.mode = mode;
-        gamestate.difficulty = difficulty;
-        gamestate.maze = maze;
-        gamestate.width = width;
-        gamestate.height = height;
-        gamestate.player_x = player_x;
-        gamestate.player_y = player_y;
-        saveGame(gamestate);
+        game.mode = mode;
+        game.difficulty = difficulty;
+        game.maze = maze;
+        game.width = width;
+        game.height = height;
+        game.player_x = player_x;
+        game.player_y = player_y;
+        game.end_x = end_x;
+        game.end_y = end_y;
+        game.bomb=bomb;
+        saveGame(game);
         time_rank.push_back(elapsed);
-        for (int i = 0; i < width; i++) {
-            delete[] maze[i];
-        }
-        delete[] maze;
+
         endwin();
     }
     // Clean up
 
     return 0;
 }
-
