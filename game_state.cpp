@@ -44,13 +44,10 @@ void updateRank(double time,int mode, int difficulty,string username) {
     }
 }
 
-void top(string filename,string &fastest_name, int &fastest){
+void top(string filename,string &fastest_name, int &fastest, int timelimit){
     ifstream fin;
     fin.open(filename.c_str());
-    if (fin.fail()){
-        cout<<"No record";
-    }
-    fastest=1000;
+    fastest=timelimit;
     string name;
     int record;
     while(fin>>name>>record){
