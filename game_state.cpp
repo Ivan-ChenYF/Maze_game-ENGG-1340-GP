@@ -43,7 +43,18 @@ void updateRank(double time,int mode, int difficulty,string username) {
         fout.close();
     }
 }
-
+void print_ranking(string filename){
+    ifstream fin;
+    fin.open(filename.c_str());
+    string name;
+    int record;
+    int i=0;
+    while(fin>>name>>record){
+        mvprintw(i,0,"Name: %s  record: %d ",name.c_str(),record);
+    }
+    clear();
+    fin.close();
+}
 void top(string filename,string &fastest_name, int &fastest, int timelimit){
     ifstream fin;
     fin.open(filename.c_str());
