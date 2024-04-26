@@ -30,6 +30,6 @@ void initializeNewGame(GameState& gameState);
 void updateRank(double time,int mode, int difficulty,string username);
 void saveGame(const GameState& gameState);
 void loadGame(GameState& gameState);
-void top(string filename,string &fastest_name, int &fastest);
+void top(string filename,string &fastest_name, int &fastest,int limit);
 #endif
 
