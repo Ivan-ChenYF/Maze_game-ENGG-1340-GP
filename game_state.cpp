@@ -54,9 +54,13 @@ void print_ranking(string filename){
     int i=0;
     while(fin>>name>>record){
         mvprintw(i,0,"Name: %s  record: %d ",name.c_str(),record);
+        i++;
     }
-    clear();
     fin.close();
+    
+    mvpirntw(i+1, 0, ">>> PRESS ANYTHING TO RETURN TO MAIN MENU<<<")
+    getch();
+    clear();
 }
 
 void top(string filename,string &fastest_name, int &fastest,int limit){
