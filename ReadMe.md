@@ -83,6 +83,8 @@ To run the game, you'll need a C++ compiler and a terminal or command prompt. Fo
 
 ## How to Play
 After launching the game, follow the on-screen instructions to create a user and navigate through the maze.
+- 🗺️Classical mode: Navigate the maze directly in the most classical way
+- 🌫️Fog mode: This will be more difficult as your vision is blocked by a crowd fog.
 
 ### Game Controls
 - **Movement**: Use arrow keys or specific letters (`w`, `a`, `s`, `d`) to move through the maze.
