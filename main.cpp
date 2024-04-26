@@ -253,8 +253,7 @@ int main(){ // the logical flow of the game
             top("fog_d.txt",fastest_name,fastest,timelimit);
         }
 
-        
-        
+          
         time_t start_time = time(nullptr);
         time_t current_time;
 
@@ -334,8 +333,6 @@ int main(){ // the logical flow of the game
         endwin();
     }
     
-    PrintFromFile("ASCII - End.txt");
-    usleep(2000000);
     endwin();
     return 0;
 }
