@@ -7,6 +7,8 @@
 #include <string>
 #include <unistd.h>
 using namespace std;
+int fastest;
+string fastest_name;
 
 void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y,int timelimit,int bomb){
     for (int i = 0; i < width; i++) {
@@ -15,7 +17,7 @@ void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,
         }
     }
     clear();
-    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb,timelimit-elapsed);
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb,timelimit-elapsed,fastest,fastest_name);
     refresh();
 }
 void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y, int timelimit,int bomb){
@@ -45,7 +47,7 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
 
 
     clear();
-    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb,timelimit-elapsed);
+    printMaze(maze, width, height, player_x, player_y,end_x,end_y,bomb,timelimit-elapsed,fastest,fastest_name);
     refresh();
     for (int i = minX; i <= maxX; i++) {
         for (int j = minY; j <= maxY; j++) {
@@ -178,6 +180,24 @@ int main(){
         }
 
 
+        if (mode==0&&difficulty==0){
+            top("c_e.txt",fastest_name,fastest);
+        }
+        else if (mode==0&&difficulty==1){
+            top("c_m.txt",fastest_name,fastest);
+        }
+        else if (mode==0&&difficulty==2){
+            top("c_d.txt",fastest_name,fastest);
+        }
+        else if (mode==1&&difficulty==0){
+            top("fog_e.txt",fastest_name,fastest);
+        }
+        else if (mode==1&&difficulty==1){
+            top("fog_m.txt",fastest_name,fastest);
+        }
+        else if (mode==1&&difficulty==2){
+            top("fog_d.txt",fastest_name,fastest);
+        }
 
         
         
@@ -196,7 +216,7 @@ int main(){
         timeout(100);     //100毫秒没有接收到新的输入返回ERR
         
         
-        
+
         
         
         player_x = start_x;
@@ -256,10 +276,11 @@ int main(){
         game.bomb=bomb;
         game.elapsed=elapsed;
         saveGame(game);
-
+        updateRank(elapsed,mode,difficulty,game.player_name);
         endwin();
     }
     // Clean up
 
     return 0;
 }
+
