@@ -4,20 +4,15 @@
 #include "random_maze.h"
 using namespace std;
 
+void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y,int bomb,double elapsed,int fastest,
+               string fastest_name) {
 
-
-
-
-void printMaze(cell** maze, int width, int height, int player_x,int player_y,int end_x,int end_y,int bomb,double elapsed) {
-
-
+    mvprintw(2*height+2, 0, "Top Record: \nPlayer: %s  time: %ds",fastest_name.c_str(),fastest );
    
     mvprintw(2 * end_y + 1, 4 * end_x + 2, "#");
-
     mvprintw(2*height+2, 0, "Time remaining: %.0f seconds", elapsed);
     mvprintw(2 * player_y + 1, 4 * player_x + 2, "@");
     mvprintw(0, 4 * width + 3, "Bomb: %d", bomb);
-    mvprintw(1, 4 * width + 3, "Enter b to use the bomb and then use key array to select direction");
     // The corner and edges need to be handled for the entire grid
     mvprintw(2*height-2, 4 * width + 3, "Player position: @");
     mvprintw(2*height-1, 4 * width + 3, "Destination: #");
@@ -82,5 +77,8 @@ void printMaze(cell** maze, int width, int height, int player_x,int player_y,int
             mvaddch(0, 4 * i + 3, '-');
         }
     }
+    
+
+
 }
 
