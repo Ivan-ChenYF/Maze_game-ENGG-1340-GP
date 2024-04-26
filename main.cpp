@@ -186,7 +186,7 @@ int main(){ // the logical flow of the game
                     break;
 
             }
-            break;
+            continue;
         }
         else if (mode ==3){
             loadGame(game);  // 确保 game 是一个 GameState 类型的实例
