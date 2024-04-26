@@ -8,11 +8,6 @@
 #include <unistd.h>
 using namespace std;
 
-void init_game(cell** &maze,int width,int height,int start_x,int start_y,int &end_x,int &end_y){
-
-    
-}
-
 void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y,int timelimit,int bomb){
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
