@@ -322,8 +322,10 @@ int main(){ // the logical flow of the game
         updateRank(elapsed,mode,difficulty,game.player_name);
         endwin();
     }
-    // Clean up
-
+    
+    PrintFromFile("ASCII - End.txt");
+    usleep(2000000);
+    endwin();
     return 0;
 }
 
