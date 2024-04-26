@@ -9,27 +9,24 @@ using namespace std;
 
 void player_movement(cell **&maze, int width, int height, int &playerX, int &playerY, int input, int &bomb)
 {
-    // Draw player at initial position
 
-    // char input = getSingleKeyPress();
-    //  int playerY = start_y, playerX = start_x;
     switch (input)
     {
     case 119:
-        if (playerY > 0 && !maze[playerX][playerY].top_w)
+        if (playerY > 0 && !maze[playerX][playerY].top_w) //checking for the wall on the top and see if the player is moving within the maze
         {
-            playerY--;
+            playerY--; // move upward
         }
         else
         {
-            mvprintw(4, 4 * width + 3, "Invalid Move");
+            mvprintw(4, 4 * width + 3, "Invalid Move"); 
             break;
         }
         break;
     case 97:
-        if (playerX > 0 && !maze[playerX][playerY].left_w)
+        if (playerX > 0 && !maze[playerX][playerY].left_w) // checking for the wall on the left and see if the player is moving within the maze
         {
-            playerX--;
+            playerX--; // move left
         }
         else
         {
@@ -38,9 +35,9 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         break;
     case 115:
-        if (playerY < height - 1 && !maze[playerX][playerY].down_w)
+        if (playerY < height - 1 && !maze[playerX][playerY].down_w) //checking for the wall on the down and see if the player is moving within the maze
         {
-            playerY++;
+            playerY++; // move down 
         }
         else
         {
@@ -49,9 +46,9 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         }
         break;
     case 100:
-        if (playerX < width - 1 && !maze[playerX][playerY].right_w)
+        if (playerX < width - 1 && !maze[playerX][playerY].right_w) //checking for the wall on the right and see if the player is moving within the maze
         {
-            playerX++;
+            playerX++; // move right
         }
         else
         {
@@ -105,22 +102,22 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
             break;
         }
         break;
-    case 98: // 'b' for bomb
+    case 98: // 'b' button for bomb 
 
         time_t start_time = time(nullptr);
         time_t current_time;
         int ch;
         double elapsed;
 
-        while (bomb != 0)
+        while (bomb != 0) //check if the player still have bomb
         {
             current_time = time(nullptr);
             elapsed = difftime(current_time, start_time);
             mvprintw(2 * height + 1, 0, "You got a bomb, press arrow key to choose wall to destroy");
             refresh();
 
-            if (elapsed > 2.5)
-            { // 如果超过2秒，退出循环
+            if (elapsed > 2)
+            { //exit if exceed 2 seconds
                 break;
             }
 
