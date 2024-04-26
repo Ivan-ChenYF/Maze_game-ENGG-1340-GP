@@ -46,7 +46,7 @@ Here is an overview of the key files and their functions in the project:
 
 **coding requirements**
 - ✅ Generation of random game sets or events
-      - the maze is generated randomly in each new game using DFS algorithms.
+   - the maze is generated randomly in each new game using DFS algorithms.
 - ✅ Data structures for storing game status (e.g., arrays, STL containers)
       - Dynamic array is used for storing and updating player movement inside the maze.
 - ✅ Dynamic memory management (e.g., dynamic arrays, linked lists, STL containers)
