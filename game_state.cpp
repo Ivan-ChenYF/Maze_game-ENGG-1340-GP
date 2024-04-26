@@ -118,7 +118,7 @@ void saveGame(const GameState& gameState) {
     fout << gameState.elapsed << endl;
 
     // Write bombs left
-    fout << gameState.bomb << endl;
+    fout << gameState.bomb << " "<<gameState.timelimit<<endl;
 
     // Write maze
     for (int i = 0; i < gameState.width; ++i) {
@@ -166,7 +166,7 @@ void loadGame(GameState& gameState) {
     fin >> gameState.elapsed;
 
     // Read bombs left
-    fin >> gameState.bomb;
+    fin >> gameState.bomb>>gameState.timelimit;
 
     // Allocate memory for maze
     gameState.maze = new cell*[gameState.width];
