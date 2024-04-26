@@ -21,8 +21,8 @@ void classic_mode(cell** &maze,int width, int height, int player_x,int player_y,
     refresh();
 }
 void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int start_time,double elapsed,int end_x,int end_y, int timelimit,int bomb){
-    int centerIndex = 2; // 5x5区域的中心索引
-    int displaySize = 5; // 显示区域尺寸
+    int centerIndex = 2; 
+    int displaySize = 5; 
     int minX = max(0, player_x - centerIndex);
     int maxX = min(width - 1, player_x + centerIndex);
     int minY = max(0, player_y - centerIndex);
