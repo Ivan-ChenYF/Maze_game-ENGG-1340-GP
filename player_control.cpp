@@ -116,18 +116,18 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
             mvprintw(2 * height + 1, 0, "You got a bomb, press arrow key to choose wall to destroy");
             refresh();
 
-            if (elapsed > 2)
-            { //exit if exceed 2 seconds
+            if (elapsed > 2) //exit if exceed 2 seconds
+            { 
                 break;
             }
 
-            ch = getch(); // 获取键盘输入
+            ch = getch(); //get input from the keyboards
             switch (ch)
             {
-            case ERR: // 如果没有输入，继续循环
+            case ERR: 
                 continue;
             case KEY_UP:
-                if (playerY > 0 && maze[playerX][playerY].top_w)
+                if (playerY > 0 && maze[playerX][playerY].top_w) // destroy the wall on the top
                 {
                     bomb--;
                     maze[playerX][playerY].top_w = false;
@@ -135,7 +135,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
                 }
                 break;
             case KEY_LEFT:
-                if (playerX > 0 && maze[playerX][playerY].left_w)
+                if (playerX > 0 && maze[playerX][playerY].left_w) // destroy the wall on the left
                 {
                     bomb--;
                     maze[playerX][playerY].left_w = false;
@@ -143,7 +143,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
                 }
                 break;
             case KEY_DOWN:
-                if (playerY < height - 1 && maze[playerX][playerY].down_w)
+                if (playerY < height - 1 && maze[playerX][playerY].down_w)// destroy the wall on the down 
                 {
                     bomb--;
                     maze[playerX][playerY].down_w = false;
@@ -151,7 +151,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
                 }
                 break;
             case KEY_RIGHT:
-                if (playerX < width - 1 && maze[playerX][playerY].right_w)
+                if (playerX < width - 1 && maze[playerX][playerY].right_w)// destroy the wall on the right
                 {
                     bomb--;
                     maze[playerX][playerY].right_w = false;
@@ -159,7 +159,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
                 }
                 break;
             }
-            break; // 一旦接收到有效输入即退出循环
+            break; 
         }
         mvprintw(2 * height + 1, 4 * width + 1, "No Bomb");
     }
