@@ -51,14 +51,14 @@ void print_ranking(string filename){
     fin.open(filename.c_str());
     string name;
     int record;
-    int i=0;
+    int i=1;
     while(fin>>name>>record){
-        mvprintw(i,0,"Name: %s  record: %d ",name.c_str(),record);
+        mvprintw(i, 2,"Name: %s  record: %d ",name.c_str(),record);
         i++;
     }
     fin.close();
     
-    mvprintw(i+1, 0, ">>> PRESS ANYTHING TO RETURN TO MAIN MENU<<<");
+    mvprintw(i+1, 2, ">>> PRESS ANYTHING TO RETURN TO MAIN MENU<<<");
     getch();
     clear();
 }
