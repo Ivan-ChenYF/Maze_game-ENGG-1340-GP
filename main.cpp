@@ -96,6 +96,7 @@ int main(){
     int mode;
     cell** maze=nullptr;
     double elapsed;
+    double time_used=0;
     int player_x,player_y;
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
@@ -168,7 +169,10 @@ int main(){
                     maze[i][j].revealed = game.maze[i][j].revealed;
                 }
             }
-            
+            mode=game.mode;
+            start_x=game.player_x;
+            start_y=game.player_y;
+            time_used=game.elapsed;
         }
     
         else if (mode == 3){
@@ -210,7 +214,7 @@ int main(){
             
             
             current_time = time(nullptr);
-            elapsed= difftime(current_time, start_time);
+            elapsed= difftime(current_time, start_time)+time_used;
             
             if (elapsed>timelimit){
                 init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
@@ -255,6 +259,7 @@ int main(){
         game.end_x = end_x;
         game.end_y = end_y;
         game.bomb=bomb;
+        game.elapsed=elapsed;
         saveGame(game);
 
         endwin();
