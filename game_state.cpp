@@ -2,6 +2,7 @@
 #include "random_maze.h"
 #include <iostream>
 #include <fstream>
+#include <ncurses.h>
 using namespace std;
 
 void updateRank(double time,int mode, int difficulty,string username) {
@@ -43,7 +44,9 @@ void updateRank(double time,int mode, int difficulty,string username) {
         fout.close();
     }
 }
+
 void print_ranking(string filename){
+    initscr();
     ifstream fin;
     fin.open(filename.c_str());
     string name;
@@ -55,10 +58,14 @@ void print_ranking(string filename){
     clear();
     fin.close();
 }
-void top(string filename,string &fastest_name, int &fastest, int timelimit){
+
+void top(string filename,string &fastest_name, int &fastest){
     ifstream fin;
     fin.open(filename.c_str());
-    fastest=timelimit;
+    if (fin.fail()){
+        cout<<"No record";
+    }
+    fastest=1000;
     string name;
     int record;
     while(fin>>name>>record){
