@@ -204,7 +204,7 @@ int main(){ // the logical flow of the game
             end_x=game.end_x;
             end_y=game.end_y;
             bomb=game.bomb;
-            
+            timelimit=game.timelimit;
             // After loading, we might need to setup the maze structure
             maze = new cell*[game.width];  
             for (int i = 0; i < game.width; ++i) {
@@ -328,6 +328,7 @@ int main(){ // the logical flow of the game
         game.end_y = end_y;
         game.bomb=bomb;
         game.elapsed=elapsed;
+        game.timelimit=timelimit;
         saveGame(game);
         updateRank(elapsed,mode,difficulty,game.player_name);
         endwin();
