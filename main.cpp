@@ -163,8 +163,8 @@ int main(){ // the logical flow of the game
             time_used=0;
         }
         else if (mode == 2){
-            int rankchoice = choiceUI(RANK, game.player_name);
-            switch(rankchoice)
+            int recordchoice = choiceUI(RECORD, game.player_name);
+            switch(recordchoice)
             {
                 case 0:
                     print_ranking("c_e.txt");
