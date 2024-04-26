@@ -15,8 +15,6 @@
 - [Project Structure](#project-structure)
 - [Installation and Setup](#installation-and-setup)
 - [How to Play](#how-to-play)
-  - [Game Controls](#game-controls)
-  - [Gameplay Mechanics](#gameplay-mechanics)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -24,7 +22,9 @@
 The Enigma Maze Game is a simple text maze game based on ncurses library where players can create user profiles, explore a randomly generated maze, and try to reach the end. The game features ASCII art, interactive menus, and a variety of gameplay options.
 
 ## Project Structure
-Here is an overview of the key files and their functions in the project:
+**Library Used**
+- Standard library is used with addition of ncurses, ctime and unistd
+- Here is an overview of the key files and their functions in the project:
 
 **Source Code**
 - `main.cpp`: The main entry point for the game, responsible for initialization and setup. It allows the player to choose the game mode they want.
