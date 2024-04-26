@@ -18,8 +18,8 @@ void printMaze(cell** maze, int width, int height, int player_x,int player_y,int
     mvprintw(2 * player_y + 1, 4 * player_x + 2, "@");
     mvprintw(0, 4 * width + 3, "Bomb: %d", bomb);
     // The corner and edges need to be handled for the entire grid
-    mvprintw(2, 4 * width + 3, "Player position: @");
-    mvprintw(4, 4 * width + 3, "Destination: #");
+    mvprintw(2*height-2, 4 * width + 3, "Player position: @");
+    mvprintw(2*height-1, 4 * width + 3, "Destination: #");
     for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
             if (maze[i][j].revealed==true){
