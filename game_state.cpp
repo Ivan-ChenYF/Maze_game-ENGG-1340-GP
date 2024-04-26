@@ -58,7 +58,7 @@ void print_ranking(string filename){
     }
     fin.close();
     
-    mvpirntw(i+1, 0, ">>> PRESS ANYTHING TO RETURN TO MAIN MENU<<<")
+    mvprintw(i+1, 0, ">>> PRESS ANYTHING TO RETURN TO MAIN MENU<<<")
     getch();
     clear();
 }
