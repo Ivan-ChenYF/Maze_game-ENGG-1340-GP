@@ -162,32 +162,7 @@ int main(){ // the logical flow of the game
             generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
             time_used=0;
         }
-        else if (mode == 2){
-            int rankchoice = choiceUI(RANK, game.player_name);
-            switch(rankchoice)
-            {
-                case 0:
-                    print_ranking("c_e.txt");
-                    break;
-                case 1:
-                    print_ranking("c_m.txt");
-                    break;
-                case 2:
-                    print_ranking("c_d.txt");
-                    break;
-                case 3:
-                    print_ranking("fog_e.txt");
-                    break;
-                case 4:
-                    print_ranking("fog_m.txt");
-                    break;
-                case 5:
-                    print_ranking("fog_d.txt");
-                    break;
 
-            }
-            break;
-        }
         else if (mode ==3){
             loadGame(game);  // 确保 game 是一个 GameState 类型的实例
 
