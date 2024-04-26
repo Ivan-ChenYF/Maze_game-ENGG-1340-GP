@@ -59,13 +59,13 @@ void print_ranking(string filename){
     fin.close();
 }
 
-void top(string filename,string &fastest_name, int &fastest){
+void top(string filename,string &fastest_name, int &fastest,int limit){
     ifstream fin;
     fin.open(filename.c_str());
     if (fin.fail()){
         cout<<"No record";
     }
-    fastest=1000;
+    fastest=limit;
     string name;
     int record;
     while(fin>>name>>record){
