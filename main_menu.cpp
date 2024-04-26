@@ -23,7 +23,7 @@ int choiceUI(OptionType optionType, string username) {
         {"Customize", 3}
     };
 
-    const Option rankingOptions[] = {
+    const Option recordOptions[] = {
         {"Classic - Easy", 0},
         {"Classic - Medium", 1},
         {"Classic - Difficult", 2},
@@ -41,7 +41,7 @@ int choiceUI(OptionType optionType, string username) {
     } else if (optionType == DIFFICULTY) {
         options = difficultyOptions;
         numOptions = sizeof(difficultyOptions) / sizeof(difficultyOptions[0]);
-    } else if (optionType == RANK){
+    } else if (optionType == RECORD){
         options = rankingOptions;
         numOptions = sizeof(rankingOptions) / sizeof(rankingOptions[0]);
     } else {
