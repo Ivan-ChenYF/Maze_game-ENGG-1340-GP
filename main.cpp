@@ -91,7 +91,7 @@ int main(){
     int mode;
     cell** maze=nullptr;
     double elapsed;
-    double time_used=0;
+    double time_used;
     int player_x,player_y;
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
@@ -141,7 +141,7 @@ int main(){
                 }
             }
             generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
-
+            time_used=0;
         }
         else if (mode ==2){
             loadGame(game);  // 确保 game 是一个 GameState 类型的实例
@@ -263,4 +263,3 @@ int main(){
 
     return 0;
 }
-
