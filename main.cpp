@@ -57,22 +57,22 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
 }
 
 void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y,int &timelimit,int &bomb, string username){
-    if (mode==0){
+    if (mode==0){ //refer to easy
         width=height=10;
         timelimit=60;
         bomb=1;
     }
-    else if (mode==1){
+    else if (mode==1){ //refer to medium
         width=height=15;
         timelimit=100;
         bomb=2;
     }
-    else if (mode==2){
+    else if (mode==2){ // rerfer difficult
         width=height=20;
         timelimit=140;
         bomb=3;
     }
-    else if (mode==3){
+    else if (mode==3){ //customize mode
         customize(width, height, timelimit, bomb, username);
     }
 
@@ -189,10 +189,10 @@ int main(){ // the logical flow of the game
             continue;
         }
         else if (mode ==3){
-            loadGame(game);  // 确保 game 是一个 GameState 类型的实例
+            loadGame(game);  
 
             // After loading, we might need to setup the maze structure
-            maze = new cell*[game.width];  // 动态分配空间
+            maze = new cell*[game.width];  
             for (int i = 0; i < game.width; ++i) {
                 maze[i] = new cell[game.height];
             }
