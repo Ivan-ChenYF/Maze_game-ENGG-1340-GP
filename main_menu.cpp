@@ -55,6 +55,7 @@ int choiceUI(OptionType optionType, string username) {
     noecho();
     keypad(stdscr, TRUE);
     curs_set(0);
+    timeout(-1);
 
     // GET SCREEN SIZE
     int maxRows, maxCols;
