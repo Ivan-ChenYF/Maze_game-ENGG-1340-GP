@@ -48,13 +48,13 @@ Here is an overview of the key files and their functions in the project:
 - ✅ Generation of random game sets or events
    - the maze is generated randomly in each new game using DFS algorithms.
 - ✅ Data structures for storing game status (e.g., arrays, STL containers)
-      - Dynamic array is used for storing and updating player movement inside the maze.
+   - Dynamic array is used for storing and updating player movement inside the maze.
 - ✅ Dynamic memory management (e.g., dynamic arrays, linked lists, STL containers)
-      - This feature is reflected in the customize mode where player is allowed to input the size of maze they want.
+   - This feature is reflected in the customize mode where player is allowed to input the size of maze they want.
 - ✅ File input/output (e.g., for loading/saving game status)
-      - Players can quit the game in the middle while saving the game status through the game_state function.
+   - Players can quit the game in the middle while saving the game status through the game_state function.
 - ✅ Program codes in multiple files (recall separate compilation)
-      - UI design, player control, maze generation and game saving function are coded separately. 
+   - UI design, player control, maze generation and game saving function are coded separately. 
 - ✅ Proper indentation and naming styles
 - ✅ In-code documentation
 
