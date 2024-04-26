@@ -143,7 +143,7 @@ int main(){ // the logical flow of the game
     clear();
     refresh();
     
-    cout << "Your user name is " << game.player_name << endl;
+    // cout << "Your user name is " << game.player_name << endl;
     bool gamestate=true;
     while (gamestate){
         mode = choiceUI(MODE, game.player_name);
@@ -162,11 +162,37 @@ int main(){ // the logical flow of the game
             generateMaze(maze, width,height,start_x,start_y,end_x,end_y);
             time_used=0;
         }
-        else if (mode ==2){
-            loadGame(game);  
+        else if (mode == 2){
+            int rankchoice = choiceUI(RANK, game.player_name);
+            switch(rankchoice)
+            {
+                case 0:
+                    print_ranking("c_e.txt");
+                    break;
+                case 1:
+                    print_ranking("c_m.txt");
+                    break;
+                case 2:
+                    print_ranking("c_d.txt");
+                    break;
+                case 3:
+                    print_ranking("fog_e.txt");
+                    break;
+                case 4:
+                    print_ranking("fog_m.txt");
+                    break;
+                case 5:
+                    print_ranking("fog_d.txt");
+                    break;
+
+            }
+            break;
+        }
+        else if (mode ==3){
+            loadGame(game);  // 确保 game 是一个 GameState 类型的实例
 
             // After loading, we might need to setup the maze structure
-            maze = new cell*[game.width];  
+            maze = new cell*[game.width];  // 动态分配空间
             for (int i = 0; i < game.width; ++i) {
                 maze[i] = new cell[game.height];
             }
@@ -189,7 +215,7 @@ int main(){ // the logical flow of the game
             time_used=game.elapsed;
         }
     
-        else if (mode == 3){
+        else if (mode == 4){
             PrintFromFile("ASCII - End.txt");
             usleep(2000000);
             endwin();
