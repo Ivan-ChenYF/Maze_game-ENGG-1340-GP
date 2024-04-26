@@ -8,7 +8,7 @@ using namespace std;
 enum OptionType {
     MODE,
     DIFFICULTY,
-    RANK
+    RECORD
 };
 
 struct Option {
