@@ -43,7 +43,7 @@ int choiceUI(OptionType optionType, string username) {
         numOptions = sizeof(difficultyOptions) / sizeof(difficultyOptions[0]);
     } else if (optionType == RECORD){
         options = recordOptions;
-        numOptions = sizeof(rankingOptions) / sizeof(rankingOptions[0]);
+        numOptions = sizeof(recordOptions) / sizeof(recordOptions[0]);
     } else {
         return -1; // INVALIE OPTION TYPE
     }
