@@ -1,14 +1,65 @@
 #include "game_state.h"
 #include "random_maze.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
-void updateRank(vector<int>& rank, int time) {
+void updateRank(double time,int mode, int difficulty,string username) {
     // Add time record to rank
-    rank.push_back(time);
-    
-    // Sort ranking in ascending time
-    sort(rank.begin(), rank.end());
+    if (mode==0&&difficulty==0){
+        ofstream fout;
+        fout.open ("c_e.txt",ios::app);
+        fout<<username<<" "<<time<<endl;
+        fout.close();
+    }
+    else if (mode==0&&difficulty==1){
+        ofstream fout;
+        fout.open ("c_m.txt",ios::app);
+        fout<<username<<" "<<time<<endl;
+        fout.close();
+    }
+    else if (mode==0&&difficulty==2){
+        ofstream fout;
+        fout.open ("c_d.txt",ios::app);
+        fout<<username<<" "<<time<<endl;
+        fout.close();
+    }
+    else if (mode==1&&difficulty==0){
+        ofstream fout;
+        fout.open ("fog_e.txt",ios::app);
+        fout<<username<<" "<<time<<endl;
+        fout.close();
+    }
+    else if (mode==1&&difficulty==1){
+        ofstream fout;
+        fout.open ("fog_m.txt",ios::app);
+        fout<<username<<" "<<time<<endl;
+        fout.close();
+    }
+    else if (mode==1&&difficulty==2){
+        ofstream fout;
+        fout.open("fog_d.txt",ios::app);
+        fout<<username<<" "<<time<<endl;
+        fout.close();
+    }
+}
+
+void top(string filename,string &fastest_name, int &fastest){
+    ifstream fin;
+    fin.open(filename.c_str());
+    if (fin.fail()){
+        cout<<"No record";
+    }
+    fastest=1000;
+    string name;
+    int record;
+    while(fin>>name>>record){
+        if (record<fastest){
+            fastest=record;
+            fastest_name=name;
+        }
+    }
+    fin.close();
 }
 
 void updateInventory(vector<Item>& inventory, Item item) {
