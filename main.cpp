@@ -28,17 +28,17 @@ void fog_mode(cell** &maze,int width, int height, int player_x,int player_y,int 
     int minY = max(0, player_y - centerIndex);
     int maxY = min(height - 1, player_y + centerIndex);
 
-    // 确保显示区域为5x5，如果接近边界，则调整
+    // ensure the size of displayable area
     if (maxX - minX < displaySize - 1) {
-        if (minX == 0) maxX = displaySize - 1; // 靠近左边界
-        if (maxX == width - 1) minX = width - displaySize; // 靠近右边界
+        if (minX == 0) maxX = displaySize - 1; 
+        if (maxX == width - 1) minX = width - displaySize;
     }
     if (maxY - minY < displaySize - 1) {
-        if (minY == 0) maxY = displaySize - 1; // 靠近上边界
-        if (maxY == height - 1) minY = height - displaySize; // 靠近下边界
+        if (minY == 0) maxY = displaySize - 1; 
+        if (maxY == height - 1) minY = height - displaySize;
     }
 
-    // 设置显示区域
+    // set up the display area
     for (int i = minX; i <= maxX; i++) {
         for (int j = minY; j <= maxY; j++) {
             maze[i][j].revealed = true;
@@ -80,7 +80,7 @@ void difficult_level(int mode, int &width,int &height,int &start_x, int &start_y
     start_x=rand()%width;
     start_y=rand()%height;
 }
-int main(){
+int main(){ // the logical flow of the game
     int bomb=0;
     int timelimit;
     int ch;
@@ -102,7 +102,7 @@ int main(){
     setlocale(LC_ALL, "");
     initscr();
     curs_set(0);
-    PrintFromFile("ASCII - Enigma_Maze.txt");
+    PrintFromFile("ASCII - Enigma_Maze.txt"); //the UI design
     getch();
     clear();
     refresh();
@@ -150,7 +150,7 @@ int main(){
         if (mode==0||mode==1){
             difficulty = choiceUI(DIFFICULTY, game.player_name);
             difficult_level(difficulty,width,height,start_x,start_y,timelimit,bomb, game.player_name);
-            maze = new cell*[width]; //使用动态数组创建maze
+            maze = new cell*[width]; //creating the maze using dynamic data
             for (int i = 0; i < width; ++i) {
                 maze[i] = new cell [height];
             }
@@ -163,10 +163,10 @@ int main(){
             time_used=0;
         }
         else if (mode ==2){
-            loadGame(game);  // 确保 game 是一个 GameState 类型的实例
+            loadGame(game);  
 
             // After loading, we might need to setup the maze structure
-            maze = new cell*[game.width];  // 动态分配空间
+            maze = new cell*[game.width];  
             for (int i = 0; i < game.width; ++i) {
                 maze[i] = new cell[game.height];
             }
@@ -230,7 +230,7 @@ int main(){
         noecho();           // Don't echo user input
         keypad(stdscr, TRUE); // Enable function keys
         curs_set(0);        // Hide the cursor
-        timeout(100);     //100毫秒没有接收到新的输入返回ERR
+        timeout(100);    
         
         
 
@@ -249,8 +249,8 @@ int main(){
             elapsed= difftime(current_time, start_time)+time_used;
             
             if (elapsed>timelimit){
-                init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
-                attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
+                init_pair(1, COLOR_RED, COLOR_WHITE); // define the color 
+                attron(COLOR_PAIR(1));  // define the color 
                 usleep(100000);
                 clear();
                 PrintFromFile("ASCII - Try_Again.txt");
@@ -259,8 +259,8 @@ int main(){
                 break;
             }
             if (player_x==end_x&&player_y==end_y){
-                init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
-                attron(COLOR_PAIR(1));  // 使用红色前景和白色背景
+                init_pair(1, COLOR_RED, COLOR_WHITE); 
+                attron(COLOR_PAIR(1));  
                 usleep(100000);
                 clear();
                 PrintFromFile("ASCII - Well_Done.txt");
