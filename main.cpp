@@ -98,30 +98,47 @@ int main(){
     GameState game; // Initialize gameState
     vector<double> time_rank; // Initialize ranking
     
-    // LOADING PAGE
+   // LOADING PAGE
     setlocale(LC_ALL, "");
     initscr();
+    curs_set(0);
     PrintFromFile("ASCII - Enigma_Maze.txt");
     getch();
     clear();
     refresh();
     
     // INPUT USERNAME
-    
     PrintFromFile("ASCII - Create_User.txt");
-    while ((ch = getch()) != '\n') {
+    bool invalid = false;
+    bool quit = false;
+    while (true) {
+        invalid = false;
+        ch = getch();
         if (ch == KEY_BACKSPACE || ch == 127) {
             if (!game.player_name.empty()) {
                 game.player_name.pop_back();
                 refresh();
             }
+        } else if (ch == '\n'){
+            for (const auto& name : game.player_name)
+                if (name == ' ')
+                    invalid = true;
+            if (game.player_name.empty())
+                invalid = true;
+            else
+                quit = true;
+        } else if (ch == ' ') {
+            invalid = true;
         } else {
             game.player_name.push_back(ch);
-            refresh();
         }
         clear();
         PrintFromFile("ASCII - Create_User.txt");
         printw(game.player_name.c_str());
+        if (invalid)
+            mvprintw(9,0,"**Username cannot contain whitespace or be empty!");
+        if (quit)
+            break;
     }
     clear();
     refresh();
