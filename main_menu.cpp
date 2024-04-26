@@ -11,8 +11,9 @@ int choiceUI(OptionType optionType, string username) {
     const Option modeOptions[] = {
         {"Classic Mode", 0},
         {"Fog Mode", 1},
-        {"Resume Game", 2},
-        {"End Game", 3}
+        {"Ranking", 2},
+        {"Resume Game", 3},
+        {"End Game", 4}
     };
 
     const Option difficultyOptions[] = {
@@ -20,6 +21,15 @@ int choiceUI(OptionType optionType, string username) {
         {"Medium", 1},
         {"Difficult", 2},
         {"Customize", 3}
+    };
+
+    const Option rankingOptions[] = {
+        {"Classic - Easy", 0},
+        {"Classic - Medium", 1},
+        {"Classic - Difficult", 2},
+        {"Fog - Easy", 3},
+        {"Fog - Medium", 4},
+        {"Fog - Difficult", 5}
     };
 
     const Option* options;
@@ -31,6 +41,9 @@ int choiceUI(OptionType optionType, string username) {
     } else if (optionType == DIFFICULTY) {
         options = difficultyOptions;
         numOptions = sizeof(difficultyOptions) / sizeof(difficultyOptions[0]);
+    } else if (optionType == RANK){
+        options = rankingOptions;
+        numOptions = sizeof(rankingOptions) / sizeof(rankingOptions[0]);
     } else {
         return -1; // INVALIE OPTION TYPE
     }
