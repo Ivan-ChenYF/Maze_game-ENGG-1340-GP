@@ -50,7 +50,7 @@ After launching the game, follow the on-screen instructions to create a user and
 - `player_control.cpp` and `player_control.h`: Manages player controls, movement logic and bomb function.
 - `print_maze.cpp`: Responsible for printing and displaying maze content. It includes  the visualization of the maze using ncurses, defining boundary and time remains.
 - `main_menu.cpp`: Contains logic for the main menu.
-- `print_file.cpp`: Handles the printing of files and interface components, including features like displaying ASCII art and accepting user names to engage player
+- `print_file.cpp`: Handles the printing of files and interface components, including features like displaying ASCII art.
 - `user_interface.h`: Defines functions related to the user interface.
 
 **ASCII Art Files**
@@ -59,7 +59,7 @@ After launching the game, follow the on-screen instructions to create a user and
 - `ASCII - Enigma_Maze.txt`: ASCII art for the game title screen.
 - `ASCII - Try_Again.txt`: ASCII art for the end-of-game screen(lose).
 - `ASCII - Well_Done.txt`: ASCII art for the end-of-game screen(win).
-- `ASCII - End.txt`: ASCII art for the end-of-game screen(quit).
+- `ASCII - End.txt`: ASCII art for the end-of-game screen(end program).
 
 **Record**
 - `c_e.txt, c_m, c_d.txt` are used for storing records of classical mode
