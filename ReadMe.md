@@ -25,7 +25,7 @@ The Enigma Maze Game is a simple text maze game based on ncurses library where p
 After launching the game, follow the on-screen instructions to create a user and navigate through the maze.
 - 🗺️Classical mode: Navigate the maze directly in the most classical way
 - 🌫️Fog mode: This will be more difficult as your vision is blocked by a crowd fog.
-- https://www.youtube.com/watch?v=gTnuDBI7-Vk 
+- [![Watch the video](https://img.youtube.com/vi/gTnuDBI7-Vk/0.jpg)](https://www.youtube.com/watch?v=gTnuDBI7-Vk)
 
 ### Game Controls
 - **Navigation**: Use Enter for double click and arrow key for navigating the choices.
