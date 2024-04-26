@@ -21,7 +21,7 @@ struct GameState {
     int player_x, player_y;
     int end_x, end_y;
     int mode, difficulty;
-    int bomb;
+    int bomb,timelimit;
     Inventory inventory;
     double elapsed;
 };
