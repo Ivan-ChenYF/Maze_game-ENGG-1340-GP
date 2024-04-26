@@ -47,13 +47,13 @@ Here is an overview of the key files and their functions in the project:
 **coding requirements**
 - ✅ Generation of random game sets or events
    - the maze is generated randomly in each new game using DFS algorithms.  (see **generateMaze()** in [random_maze.cpp](https://github.com/Ivan-ChenYF/ENGG-1340-GP/blob/main/random_maze.cpp))
-- ✅ Data structures for storing game status (e.g., arrays, STL containers)
+- ✅ Data structures for storing game status 
    - Dynamic array is used for storing and updating player movement and location inside the maze. (see **player_movement()** in [player_control.cpp](https://github.com/Ivan-ChenYF/ENGG-1340-GP/blob/main/player_control.cpp) [main.cpp] 
-- ✅ Dynamic memory management (e.g., dynamic arrays, linked lists, STL containers) 
+- ✅ Dynamic memory management
    - This feature is reflected in the customize mode where player is allowed to input the size of maze they want. (see [main.cpp](https://github.com/Ivan-ChenYF/ENGG-1340-GP/blob/main/main.cpp)
-- ✅ File input/output (e.g., for loading/saving game status)
+- ✅ File input/output 
    - Players can quit the game in the middle while saving the game status through the game_state function. (see [game_state.cpp](https://github.com/Ivan-ChenYF/ENGG-1340-GP/blob/main/game_state.cpp)
-- ✅ Program codes in multiple files (recall separate compilation)
+- ✅ Program codes in multiple files 
    - UI design, player control, maze generation and game saving function are coded separately. 
 - ✅ Proper indentation and naming styles
 - ✅ In-code documentation
