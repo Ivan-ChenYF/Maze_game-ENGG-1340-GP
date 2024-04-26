@@ -181,22 +181,22 @@ int main(){
 
 
         if (mode==0&&difficulty==0){
-            top("c_e.txt",fastest_name,fastest);
+            top("c_e.txt",fastest_name,fastest,timelimit);
         }
         else if (mode==0&&difficulty==1){
-            top("c_m.txt",fastest_name,fastest);
+            top("c_m.txt",fastest_name,fastest,timelimit);
         }
         else if (mode==0&&difficulty==2){
-            top("c_d.txt",fastest_name,fastest);
+            top("c_d.txt",fastest_name,fastest,timelimit);
         }
         else if (mode==1&&difficulty==0){
-            top("fog_e.txt",fastest_name,fastest);
+            top("fog_e.txt",fastest_name,fastest,timelimit);
         }
         else if (mode==1&&difficulty==1){
-            top("fog_m.txt",fastest_name,fastest);
+            top("fog_m.txt",fastest_name,fastest,timelimit);
         }
         else if (mode==1&&difficulty==2){
-            top("fog_d.txt",fastest_name,fastest);
+            top("fog_d.txt",fastest_name,fastest,timelimit);
         }
 
         
