@@ -87,13 +87,14 @@ After launching the game, follow the on-screen instructions to create a user and
 - 🌫️Fog mode: This will be more difficult as your vision is blocked by a crowd fog.
 
 ### Game Controls
+- **Navigation**: Use Enter for double click and arrow key for navigating the choices.
 - **Movement**: Use arrow keys or specific letters (`w`, `a`, `s`, `d`) to move through the maze.
 - **Pause/Exit**: Use a designated key to pause or exit the game (e.g., `q` to quit).
 - **Bomb**: Use a `b` key to pick up the bomb, then use the arrow keys to select the direction of the wall you want to destroy.
 
 ### Gameplay Mechanics
 - **Maze Navigation**: The maze is randomly generated, so each playthrough is unique.
-- **Goals**: Reach the end of the maze or complete specific tasks to win the game.
+- **Goals**: Reach the end of the maze.
 - **Score**: Depending on the game's structure, there may be a scoring system based on completion time or other factors.
 
 ## Contributors
