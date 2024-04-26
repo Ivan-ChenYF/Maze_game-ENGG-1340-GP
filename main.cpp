@@ -188,9 +188,23 @@ int main(){ // the logical flow of the game
             }
             continue;
         }
+
+
+   
+
+
         else if (mode ==3){
             loadGame(game);  
-
+            width=game.width;
+            height=game.height;
+            mode=game.mode;
+            start_x=game.player_x;
+            start_y=game.player_y;
+            time_used=game.elapsed;   
+            end_x=game.end_x;
+            end_y=game.end_y;
+            bomb=game.bomb;
+            
             // After loading, we might need to setup the maze structure
             maze = new cell*[game.width];  
             for (int i = 0; i < game.width; ++i) {
@@ -209,10 +223,7 @@ int main(){ // the logical flow of the game
                     maze[i][j].revealed = game.maze[i][j].revealed;
                 }
             }
-            mode=game.mode;
-            start_x=game.player_x;
-            start_y=game.player_y;
-            time_used=game.elapsed;
+
         }
     
         else if (mode == 4){
