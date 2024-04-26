@@ -44,6 +44,10 @@ The Enigma Maze Game is a simple text maze game based on ncurses library where p
 - `ASCII - Well_Done.txt`: ASCII art for the end-of-game screen(win).
 - `ASCII - End.txt`: ASCII art for the end-of-game screen(quit).
 
+**Record**
+- `c_e.txt, c_m, c_d.txt` are used for storing records of classical mode
+- `f_e.txt, f_m, f_d.txt` are used for storing records of fog mode
+
 **coding requirements**
 - ✅ Generation of random game sets or events
    - the maze is generated randomly in each new game using DFS algorithms.  (see **generateMaze()** in [random_maze.cpp](https://github.com/Ivan-ChenYF/ENGG-1340-GP/blob/main/random_maze.cpp))
