@@ -1,4 +1,4 @@
-# Enigma Maze Game 🚀🎮
+# Enigma Maze Game 🚀🎮 
 
 🎩✨ Welcome to the Enigma Maze Game! Get ready for an awesome adventure where you'll explore a maze full of surprises and challenges!
 
@@ -12,14 +12,26 @@
 
 ## Table of Contents
 - [Project Overview](#project-overview)
+- [How to Play](#how-to-play)
 - [Project Structure](#project-structure)
 - [Installation and Setup](#installation-and-setup)
-- [How to Play](#how-to-play)
 - [Contributors](#contributors)
 - [License](#license)
 
 ## Project Overview
 The Enigma Maze Game is a simple text maze game based on ncurses library where players can create user profiles, explore a randomly generated maze, and try to reach the end. The game features ASCII art, interactive menus, and a variety of gameplay options.
+
+## How to Play
+After launching the game, follow the on-screen instructions to create a user and navigate through the maze.
+- 🗺️Classical mode: Navigate the maze directly in the most classical way
+- 🌫️Fog mode: This will be more difficult as your vision is blocked by a crowd fog.
+- https://www.youtube.com/watch?v=gTnuDBI7-Vk 
+
+### Game Controls
+- **Navigation**: Use Enter for double click and arrow key for navigating the choices.
+- **Movement**: Use arrow keys or specific letters (`w`, `a`, `s`, `d`) to move through the maze.
+- **Pause/Exit**: Use a designated key to pause or exit the game (e.g., `q` to quit).
+- **Bomb**: Use a `b` key to pick up the bomb, then use the arrow keys to select the direction of the wall you want to destroy.
 
 ## Project Structure
 **Library Used**
@@ -84,18 +96,6 @@ To run the game, you'll need a C++ compiler and a terminal or command prompt. Fo
      ```bash
      make run
      ```
-
-## How to Play
-After launching the game, follow the on-screen instructions to create a user and navigate through the maze.
-- 🗺️Classical mode: Navigate the maze directly in the most classical way
-- 🌫️Fog mode: This will be more difficult as your vision is blocked by a crowd fog.
-
-### Game Controls
-- **Navigation**: Use Enter for double click and arrow key for navigating the choices.
-- **Movement**: Use arrow keys or specific letters (`w`, `a`, `s`, `d`) to move through the maze.
-- **Pause/Exit**: Use a designated key to pause or exit the game (e.g., `q` to quit).
-- **Bomb**: Use a `b` key to pick up the bomb, then use the arrow keys to select the direction of the wall you want to destroy.
-
 
 ## Contributors
  **Main developers and designers of the Enigma Maze Game:**
