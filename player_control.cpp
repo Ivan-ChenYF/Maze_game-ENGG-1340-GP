@@ -13,9 +13,6 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
 
     // char input = getSingleKeyPress();
     //  int playerY = start_y, playerX = start_x;
-    start_color();                        // 启动颜色功能
-    init_pair(1, COLOR_RED, COLOR_WHITE); // 定义颜色对，红色前景，白色背景
-    attron(COLOR_PAIR(1));                // 使用红色前景和白色背景
     switch (input)
     {
     case 119:
@@ -170,7 +167,7 @@ void player_movement(cell **&maze, int width, int height, int &playerX, int &pla
         mvprintw(2 * height + 1, 4 * width + 1, "No Bomb");
     }
     
-    attroff(COLOR_PAIR(1)); // 关闭颜色属性   // Refresh the screen to show the changes
+ // Refresh the screen to show the changes
     refresh();
 }
 
